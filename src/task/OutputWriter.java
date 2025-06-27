@@ -7,7 +7,6 @@ public class OutputWriter {
     public static void outputWordsToFile(String outputFilePath, ConcurrentHashMap<String, Integer> wordCount) {
         try (java.io.PrintWriter writer = new java.io.PrintWriter(outputFilePath)) {
             for (String word : wordCount.keySet()) {
-                System.out.println(word + ": " + wordCount.get(word));
                 writer.println(word + ": " + wordCount.get(word));
             }
         } catch (FileNotFoundException e) {

@@ -11,7 +11,7 @@ public class MultiThreadWordCount {
         File[] files = inputDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
 
         Thread[] threads = new Thread[files.length];
-        System.out.println("files length: " + files.length + " threads length: " + threads.length);
+        // System.out.println("files length: " + files.length + " threads length: " + threads.length);
 
         for (int i = 0; i < files.length; i++) {
             threads[i] = new Thread(new WordCounter(files[i], wordCount));
