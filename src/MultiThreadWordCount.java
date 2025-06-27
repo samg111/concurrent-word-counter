@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.concurrent.ConcurrentHashMap;
+import task.OutputWriter;
 import task.WordCounter;
 
 public class MultiThreadWordCount {
@@ -23,6 +24,6 @@ public class MultiThreadWordCount {
                 System.err.println("Thread interrupted: " + e.getMessage());
             }
         }
-
+        OutputWriter.outputWordsToFile("word_count_output.txt", wordCount);
     }
 }

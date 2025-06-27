@@ -19,7 +19,7 @@ public class WordCounter implements Runnable {
         try {
             countWordsInFile(file, wordCount);
         } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + file.getName() + " - " + e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
