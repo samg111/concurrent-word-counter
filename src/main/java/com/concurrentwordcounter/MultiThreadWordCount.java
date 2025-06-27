@@ -1,7 +1,11 @@
+package com.concurrentwordcounter;
+
 import java.io.File;
 import java.util.concurrent.ConcurrentHashMap;
-import task.OutputWriter;
-import task.WordCounter;
+
+import com.concurrentwordcounter.tasks.OutputWriter;
+import com.concurrentwordcounter.tasks.WordCounter;
+
 
 public class MultiThreadWordCount {
     static ConcurrentHashMap<String, Integer> wordCount;
