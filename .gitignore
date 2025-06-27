@@ -26,3 +26,6 @@ replay_pid*
 # Input files
 input_files/*
 !input_files/Moby Dick; Or, The Whale by Herman Melville.txt
+
+# Output files
+word_count_output.txt
