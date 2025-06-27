@@ -29,3 +29,6 @@ input_files/*
 
 # Output files
 word_count_output.txt
+
+# Maven target directory (generated build output)
+target/
