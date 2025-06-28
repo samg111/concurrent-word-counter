@@ -1,12 +1,13 @@
-import java.io.File;
-import java.util.concurrent.ConcurrentHashMap;
-import task.OutputWriter;
-import task.WordCounter;
+package com.concurrentwordcounter.threading;
 
-public class MultiThreadWordCount {
-    static ConcurrentHashMap<String, Integer> wordCount;
-    public static void main(String[] args) {
-        wordCount = new ConcurrentHashMap<>();
+import java.io.File;
+
+import static com.concurrentwordcounter.MultiThreadWordCount.wordCount;
+import com.concurrentwordcounter.tasks.OutputWriter;
+import com.concurrentwordcounter.tasks.WordCounter;
+
+public class ThreadDelegator {
+    public static void delegateTasks(){
         File inputDirectory = new File("input_files");
         File[] files = inputDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
 
