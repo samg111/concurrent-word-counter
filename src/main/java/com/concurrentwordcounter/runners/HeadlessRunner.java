@@ -1,11 +1,14 @@
 package com.concurrentwordcounter.runners;
 
-import com.concurrentwordcounter.threading.ThreadDelegator;
+import com.concurrentwordcounter.processor.WordCountProcessor;
 
 public class HeadlessRunner {
     public static void run() {
         System.out.println("Running in headless mode");
-        ThreadDelegator.delegateTasks();
+        WordCountProcessor.processFiles();
+        // ThreadDelegator.delegateTasks();
+        // OutputWriter.outputWordsToFile("word_count_output.txt", wordCount);
+
     }
     
 }

@@ -2,7 +2,7 @@ package com.concurrentwordcounter.gui;
 
 import static com.concurrentwordcounter.ConcurrentWordCounter.selectedFiles;
 import com.concurrentwordcounter.gui.components.ButtonCreator;
-import com.concurrentwordcounter.threading.ThreadDelegator;
+import com.concurrentwordcounter.processor.WordCountProcessor;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -19,7 +19,7 @@ public class JavaFxApp extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         Label label = new Label("Welcome to the Concurrent Word Counter");
-        Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {ThreadDelegator.delegateTasks();});
+        Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {WordCountProcessor.processFiles();});
         Button fileButton = ButtonCreator.createButton("Select input files", (event) -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Input Files");
