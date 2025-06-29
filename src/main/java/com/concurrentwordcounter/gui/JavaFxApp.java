@@ -1,8 +1,8 @@
 package com.concurrentwordcounter.gui;
 
 import java.io.File;
-import java.util.List;
 
+import static com.concurrentwordcounter.MultiThreadWordCount.selectedFiles;
 import com.concurrentwordcounter.threading.ThreadDelegator;
 
 import javafx.application.Application;
@@ -25,7 +25,7 @@ public class JavaFxApp extends Application{
         fileButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Input Files");
-            List<File> selectedFiles = fileChooser.showOpenMultipleDialog(primaryStage);
+            selectedFiles = fileChooser.showOpenMultipleDialog(primaryStage);
             if (selectedFiles != null && !selectedFiles.isEmpty()) {
                 for (File file : selectedFiles) {
                     System.out.println("Selected file: " + file.getAbsolutePath());
