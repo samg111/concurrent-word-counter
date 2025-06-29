@@ -6,6 +6,7 @@ import static com.concurrentwordcounter.MultiThreadWordCount.selectedFiles;
 import com.concurrentwordcounter.threading.ThreadDelegator;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,12 +35,16 @@ public class JavaFxApp extends Application{
                 System.out.println("No files selected.");
             }
         });
+        Button quitButton = new Button("Quit");
+        quitButton.setOnAction(event -> {
+            Platform.exit();
+        });
 
 
         // StackPane root = new StackPane(label, button);
 
         VBox root = new VBox(10);
-        root.getChildren().addAll(label, runButton, fileButton);
+        root.getChildren().addAll(label, fileButton, runButton, quitButton);
         Scene scene = new Scene(root, 800, 400);
 
         primaryStage.setTitle("Concurrent Word Counter");
