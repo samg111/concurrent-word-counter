@@ -1,7 +1,7 @@
 package com.concurrentwordcounter.threading;
 
-import static com.concurrentwordcounter.MultiThreadWordCount.selectedFiles;
-import static com.concurrentwordcounter.MultiThreadWordCount.wordCount;
+import static com.concurrentwordcounter.ConcurrentWordCounter.selectedFiles;
+import static com.concurrentwordcounter.ConcurrentWordCounter.wordCount;
 import com.concurrentwordcounter.tasks.OutputWriter;
 import com.concurrentwordcounter.tasks.WordCounter;
 
