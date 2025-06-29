@@ -68,7 +68,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <mainClass>com.concurrentwordcounter.MultiThreadWordCount</mainClass>
+          <mainClass>com.concurrentwordcounter.ConcurrentWordCounter</mainClass>
         </configuration>
         <executions>
           <execution>
