@@ -1,6 +1,7 @@
 package com.concurrentwordcounter.gui;
 
-import static com.concurrentwordcounter.ConcurrentWordCounter.selectedFiles;
+import static com.concurrentwordcounter.ConcurrentWordCounter.inputFiles;
+import static com.concurrentwordcounter.ConcurrentWordCounter.outputFilePath;
 import com.concurrentwordcounter.gui.components.ButtonCreator;
 import com.concurrentwordcounter.processor.WordCountProcessor;
 
@@ -20,23 +21,32 @@ public class JavaFxApp extends Application{
     public void start(Stage primaryStage) throws Exception {
         Label label = new Label("Welcome to the Concurrent Word Counter");
         Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {WordCountProcessor.processFiles();});
-        Button fileButton = ButtonCreator.createButton("Select input files", (event) -> {
+        Button inputFileButton = ButtonCreator.createButton("Select input files", (event) -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Input Files");
-            selectedFiles = fileChooser.showOpenMultipleDialog(primaryStage);
+            var files = fileChooser.showOpenMultipleDialog(primaryStage);
+            if (files != null) {
+                inputFiles = files;
+            }
+        });
+        Button outputFileButton = ButtonCreator.createButton("Select output file", (event) -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Select Output File");
+            var file = fileChooser.showSaveDialog(primaryStage);
+            if (file != null) {
+                outputFilePath = file.getAbsolutePath();
+            }
         });
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
         label.setFont(new Font("Arial", 32));
-        fileButton.setFont(new Font("Arial", 22));
+        inputFileButton.setFont(new Font("Arial", 22));
+        outputFileButton.setFont(new Font("Arial", 22));
         runButton.setFont(new Font("Arial", 22));
         quitButton.setFont(new Font("Arial", 22));
 
-
-        // StackPane root = new StackPane(label, button);
-
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(label, fileButton, runButton, quitButton);
+        root.getChildren().addAll(label, inputFileButton, outputFileButton, runButton, quitButton);
         Scene scene = new Scene(root, 800, 600);
 
         primaryStage.setTitle("Concurrent Word Counter");
