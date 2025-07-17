@@ -18,6 +18,7 @@ class WordCounterTest {
     private ConcurrentHashMap<String, Integer> wordCount;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void setUp() throws IOException {
         tempFile = File.createTempFile("testfile", ".txt");
         try (PrintWriter out = new PrintWriter(tempFile)) {
@@ -27,6 +28,7 @@ class WordCounterTest {
     }
 
     @AfterEach
+    @SuppressWarnings("unused")
     void tearDown() {
         if (tempFile != null && tempFile.exists()) {
             tempFile.delete();
