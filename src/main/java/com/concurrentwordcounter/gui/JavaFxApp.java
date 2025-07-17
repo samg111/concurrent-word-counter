@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -70,16 +71,19 @@ public class JavaFxApp extends Application{
     }
 
     private VBox createRightPane(Stage primaryStage) {
-        Button outputFileButton = ButtonCreator.createButton("Select output file", (event) -> {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select Output File");
-            var file = fileChooser.showSaveDialog(primaryStage);
-            if (file != null) {
-                outputFilePath = file.getAbsolutePath();
+        Label outputLabel = new Label("Output File");
+        Button outputFileButton = ButtonCreator.createButton("Select output directory", (event) -> {
+            DirectoryChooser directoryChooser = new javafx.stage.DirectoryChooser();
+            directoryChooser.setTitle("Select Output Directory");
+            File directory = directoryChooser.showDialog(primaryStage);
+            if (directory != null) {
+                outputFilePath = directory.getAbsolutePath();
+                outputLabel.setText(outputFilePath);
+                outputLabel.setWrapText(true);
+                outputLabel.setFont(new Font("Arial", 16));
             }
         });
         outputFileButton.setFont(new Font("Arial", 24));
-        Label outputLabel = new Label("Output File");
         outputLabel.setFont(new Font("Arial", 20));
         VBox rightPane = new VBox(10, outputLabel, outputFileButton);
         rightPane.setAlignment(Pos.CENTER);
