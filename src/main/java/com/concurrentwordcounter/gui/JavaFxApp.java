@@ -31,7 +31,7 @@ public class JavaFxApp extends Application{
         VBox bottomPane = createBottomPane();
         HBox centerPane = createCenterPane(leftPane, rightPane);
         BorderPane root = createRoot(welcomeLabel, centerPane, bottomPane);
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1280, 720);
         primaryStage.setTitle("Concurrent Word Counter");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -44,17 +44,25 @@ public class JavaFxApp extends Application{
     }
 
     private VBox createLeftPane(Stage primaryStage) {
-        Label inputLabel = new Label("Input Files");
+        Label inputLabel = new Label("Select Input Files");
         Button inputFileButton = ButtonCreator.createButton("Select input files", (event) -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Input Files");
             List<File> files = fileChooser.showOpenMultipleDialog(primaryStage);
             if (files != null) {
+                String fileNames = "";
+                for (File file : files) {
+                    String fileName = file.getName();
+                    fileNames += fileName + "\n";
+                }
+                inputLabel.setText(fileNames);
+                inputLabel.setWrapText(true);
+                inputLabel.setFont(new Font("Arial", 16));
                 inputFiles = files;
             }
         });
-        inputFileButton.setFont(new Font("Arial", 22));
-        inputLabel.setFont(new Font("Arial", 18));
+        inputFileButton.setFont(new Font("Arial", 24));
+        inputLabel.setFont(new Font("Arial", 20));
         VBox leftPane = new VBox(10, inputLabel, inputFileButton);
         leftPane.setAlignment(Pos.CENTER);
         leftPane.setMaxWidth(Double.MAX_VALUE);
@@ -70,9 +78,9 @@ public class JavaFxApp extends Application{
                 outputFilePath = file.getAbsolutePath();
             }
         });
-        outputFileButton.setFont(new Font("Arial", 22));
+        outputFileButton.setFont(new Font("Arial", 24));
         Label outputLabel = new Label("Output File");
-        outputLabel.setFont(new Font("Arial", 18));
+        outputLabel.setFont(new Font("Arial", 20));
         VBox rightPane = new VBox(10, outputLabel, outputFileButton);
         rightPane.setAlignment(Pos.CENTER);
         rightPane.setMaxWidth(Double.MAX_VALUE);
