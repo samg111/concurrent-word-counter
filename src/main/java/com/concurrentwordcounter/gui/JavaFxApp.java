@@ -1,5 +1,8 @@
 package com.concurrentwordcounter.gui;
 
+import java.io.File;
+import java.util.List;
+
 import static com.concurrentwordcounter.ConcurrentWordCounter.inputFiles;
 import static com.concurrentwordcounter.ConcurrentWordCounter.outputFilePath;
 import com.concurrentwordcounter.gui.components.ButtonCreator;
@@ -11,6 +14,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
@@ -19,16 +25,43 @@ import javafx.stage.Stage;
 public class JavaFxApp extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Label label = new Label("Welcome to the Concurrent Word Counter");
-        Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {WordCountProcessor.processFiles();});
+        Label welcomeLabel = createWelcomeLabel("Welcome to the Concurrent Word Counter");  
+        VBox leftPane = createLeftPane(primaryStage);
+        VBox rightPane = createRightPane(primaryStage);
+        VBox bottomPane = createBottomPane();
+        HBox centerPane = createCenterPane(leftPane, rightPane);
+        BorderPane root = createRoot(welcomeLabel, centerPane, bottomPane);
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setTitle("Concurrent Word Counter");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private Label createWelcomeLabel(String text) {
+        Label welcomeLabel = new Label(text);
+        welcomeLabel.setFont(new Font("Arial", 36));
+        return welcomeLabel;
+    }
+
+    private VBox createLeftPane(Stage primaryStage) {
+        Label inputLabel = new Label("Input Files");
         Button inputFileButton = ButtonCreator.createButton("Select input files", (event) -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Input Files");
-            var files = fileChooser.showOpenMultipleDialog(primaryStage);
+            List<File> files = fileChooser.showOpenMultipleDialog(primaryStage);
             if (files != null) {
                 inputFiles = files;
             }
         });
+        inputFileButton.setFont(new Font("Arial", 22));
+        inputLabel.setFont(new Font("Arial", 18));
+        VBox leftPane = new VBox(10, inputLabel, inputFileButton);
+        leftPane.setAlignment(Pos.CENTER);
+        leftPane.setMaxWidth(Double.MAX_VALUE);
+        return leftPane;
+    }
+
+    private VBox createRightPane(Stage primaryStage) {
         Button outputFileButton = ButtonCreator.createButton("Select output file", (event) -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Output File");
@@ -37,20 +70,39 @@ public class JavaFxApp extends Application{
                 outputFilePath = file.getAbsolutePath();
             }
         });
-        Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        label.setFont(new Font("Arial", 32));
-        inputFileButton.setFont(new Font("Arial", 22));
         outputFileButton.setFont(new Font("Arial", 22));
-        runButton.setFont(new Font("Arial", 22));
+        Label outputLabel = new Label("Output File");
+        outputLabel.setFont(new Font("Arial", 18));
+        VBox rightPane = new VBox(10, outputLabel, outputFileButton);
+        rightPane.setAlignment(Pos.CENTER);
+        rightPane.setMaxWidth(Double.MAX_VALUE);
+        return rightPane;
+    }
+
+    private VBox createBottomPane() {
+        Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {WordCountProcessor.processFiles();});
+        Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
+        runButton.setFont(new Font("Arial", 28));
         quitButton.setFont(new Font("Arial", 22));
+        VBox bottomPane = new VBox(20, runButton, quitButton);
+        bottomPane.setAlignment(Pos.CENTER);
+        return bottomPane;
+    }
 
-        VBox root = new VBox(10);
-        root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(label, inputFileButton, outputFileButton, runButton, quitButton);
-        Scene scene = new Scene(root, 800, 600);
+    private HBox createCenterPane(VBox leftPane, VBox rightPane) {
+        HBox centerPane = new HBox(leftPane, rightPane);
+        centerPane.setSpacing(0);
+        HBox.setHgrow(leftPane, Priority.ALWAYS);
+        HBox.setHgrow(rightPane, Priority.ALWAYS);
+        return centerPane;
+    }
 
-        primaryStage.setTitle("Concurrent Word Counter");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    private BorderPane createRoot(Label welcomeLabel, HBox centerPane, VBox bottomPane) {
+        BorderPane root = new BorderPane();
+        root.setTop(welcomeLabel);
+        BorderPane.setAlignment(welcomeLabel, Pos.CENTER);
+        root.setCenter(centerPane);
+        root.setBottom(bottomPane);
+        return root;
     }
 }
