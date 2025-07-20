@@ -96,6 +96,10 @@ public class PaneCreator {
         centerPane.setSpacing(0);
         HBox.setHgrow(leftPane, Priority.ALWAYS);
         HBox.setHgrow(rightPane, Priority.ALWAYS);
+        
+        leftPane.setPrefWidth(0);
+        rightPane.setPrefWidth(0);
+        
         return centerPane;
     }
 
