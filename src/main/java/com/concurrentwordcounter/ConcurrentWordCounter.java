@@ -10,10 +10,11 @@ import com.concurrentwordcounter.runners.HeadlessRunner;
 
 public class ConcurrentWordCounter {
     public static ConcurrentHashMap<String, Integer> wordCount;
-    public static List<File> selectedFiles;
+    public static List<File> inputFiles;
+    public static String outputFilePath;
     public static void main(String[] args) {
         wordCount = new ConcurrentHashMap<>();
-        selectedFiles = new ArrayList<>();
+        inputFiles = new ArrayList<>();
         if (args.length > 0 && args[0].equals("--headless")) {
             HeadlessRunner.run();
         } else {
