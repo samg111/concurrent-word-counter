@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,6 +17,7 @@ import com.concurrentwordcounter.tasks.WordCounter;
 class WordCounterTest {
     private File tempFile;
     private ConcurrentHashMap<String, Integer> wordCount;
+    private AtomicInteger totalCharacterCount;
 
     @BeforeEach
     @SuppressWarnings("unused")
@@ -25,6 +27,7 @@ class WordCounterTest {
             out.println("Hello world hello");
         }
         wordCount = new ConcurrentHashMap<>();
+        totalCharacterCount = new AtomicInteger(0);
     }
 
     @AfterEach
@@ -37,9 +40,10 @@ class WordCounterTest {
 
     @Test
     void testCountWordsInFile() throws FileNotFoundException {
-        WordCounter.countWordsInFile(tempFile, wordCount);
+        WordCounter.countWordsInFile(tempFile, wordCount, totalCharacterCount);
         assertEquals(2, wordCount.size());
         assertEquals(2, wordCount.get("hello"));
         assertEquals(1, wordCount.get("world"));
+        assertEquals(15, totalCharacterCount.get()); // "hello" (5) + "world" (5) + "hello" (5)
     }
 } 
