@@ -19,13 +19,13 @@ public class WordCounter implements Runnable {
     @Override
     public void run() {
         try {
-            countWordsInFile(file, wordCount, totalCharacterCount);
+            countFileComponents(file, wordCount, totalCharacterCount);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    public static void countWordsInFile(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) throws FileNotFoundException {
+    public static void countFileComponents(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) throws FileNotFoundException {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
                 String word = scanner.next().toLowerCase().replaceAll("[^a-z]", "");
