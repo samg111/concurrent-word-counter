@@ -1,7 +1,7 @@
-package com.concurrentwordcounter.gui;
+package com.concurrentfileprocessor.gui;
 
-import com.concurrentwordcounter.gui.components.ButtonCreator;
-import com.concurrentwordcounter.gui.components.PaneCreator;
+import com.concurrentfileprocessor.gui.components.ButtonCreator;
+import com.concurrentfileprocessor.gui.components.PaneCreator;
 
 import javafx.application.Application;
 import javafx.application.Platform;

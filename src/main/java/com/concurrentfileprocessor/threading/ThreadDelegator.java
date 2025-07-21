@@ -1,9 +1,9 @@
-package com.concurrentwordcounter.threading;
+package com.concurrentfileprocessor.threading;
 
-import static com.concurrentwordcounter.ConcurrentWordCounter.inputFiles;
-import static com.concurrentwordcounter.ConcurrentWordCounter.totalCharacterCount;
-import static com.concurrentwordcounter.ConcurrentWordCounter.wordCount;
-import com.concurrentwordcounter.tasks.WordCounter;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.totalCharacterCount;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.wordCount;
+import com.concurrentfileprocessor.tasks.WordCounter;
 
 public class ThreadDelegator {
     public static void delegateTasks(){

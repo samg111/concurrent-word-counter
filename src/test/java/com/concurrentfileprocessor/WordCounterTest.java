@@ -1,4 +1,4 @@
-package com.concurrentwordcounter;
+package com.concurrentfileprocessor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.concurrentwordcounter.tasks.WordCounter;
+import com.concurrentfileprocessor.tasks.WordCounter;
 
 class WordCounterTest {
     private File tempFile;

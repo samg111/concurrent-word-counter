@@ -1,11 +1,11 @@
-package com.concurrentwordcounter.gui.components;
+package com.concurrentfileprocessor.gui.components;
 
 import java.io.File;
 import java.util.List;
 
-import static com.concurrentwordcounter.ConcurrentWordCounter.inputFiles;
-import static com.concurrentwordcounter.ConcurrentWordCounter.outputFilePath;
-import com.concurrentwordcounter.processor.WordCountProcessor;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
+import com.concurrentfileprocessor.processor.WordCountProcessor;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;

@@ -1,6 +1,6 @@
-package com.concurrentwordcounter.runners;
+package com.concurrentfileprocessor.runners;
 
-import com.concurrentwordcounter.gui.JavaFxApp;
+import com.concurrentfileprocessor.gui.JavaFxApp;
 
 import javafx.application.Application;
 

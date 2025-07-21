@@ -1,4 +1,4 @@
-package com.concurrentwordcounter.tasks;
+package com.concurrentfileprocessor.tasks;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
