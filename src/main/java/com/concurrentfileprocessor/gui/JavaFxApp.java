@@ -59,8 +59,8 @@ public class JavaFxApp extends Application{
     }
 
     private StartWindowComponents createStartWindowComponents() {
-        Label welcomeLabel = new Label("Welcome to the Concurrent Word Counter");
-        welcomeLabel.setFont(new Font("Arial", 28));
+            Label welcomeLabel = new Label("Welcome to the Concurrent File Processor");
+            welcomeLabel.setFont(new Font("Arial", 28));
         welcomeLabel.setAlignment(Pos.CENTER);
 
         Label instructionLabel = new Label("Click Start to continue.");
@@ -77,7 +77,7 @@ public class JavaFxApp extends Application{
 
     private void showMainWindow() {
         Stage mainStage = new Stage();
-        Label welcomeLabel = PaneCreator.createWelcomeLabel("Concurrent Word Counter");
+        Label welcomeLabel = PaneCreator.createWelcomeLabel("Concurrent File Processor");
         VBox leftPane = PaneCreator.createLeftPane(mainStage);
         VBox rightPane = PaneCreator.createRightPane(mainStage);
         VBox bottomPane = PaneCreator.createBottomPane();
@@ -85,7 +85,7 @@ public class JavaFxApp extends Application{
         BorderPane root = PaneCreator.createRoot(welcomeLabel, centerPane, bottomPane);
         root.setStyle("-fx-background-color: #64748b;");
         Scene scene = new Scene(root, 1280, 720);
-        mainStage.setTitle("Concurrent Word Counter");
+        mainStage.setTitle("Concurrent File Processor");
         mainStage.setScene(scene);
         
         mainStage.setMinWidth(1280);
