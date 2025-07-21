@@ -1,8 +1,10 @@
 package com.concurrentwordcounter.gui;
 
+import com.concurrentwordcounter.gui.components.ButtonCreator;
 import com.concurrentwordcounter.gui.components.PaneCreator;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,23 +18,58 @@ import javafx.stage.Stage;
 public class JavaFxApp extends Application{
     @Override
     public void start(Stage primaryStage) {
+        showStartWindow(primaryStage);
+    }
+
+    private void showStartWindow(Stage primaryStage) {
         VBox startLayout = new VBox(20);
         startLayout.setAlignment(Pos.CENTER);
-        Label startLabel = new Label("Welcome to the Concurrent Word Counter\nClick Start to continue.");
-        Button startButton = new Button("Start");
-        startLabel.setAlignment(Pos.CENTER);
-        startLabel.setFont(new Font("Arial", 28));
-        startButton.setFont(new Font("Arial", 24));
-        startLayout.getChildren().addAll(startLabel, startButton);
+        StartWindowComponents components = createStartWindowComponents();
+        startLayout.getChildren().addAll(
+            components.welcomeLabel,
+            components.instructionLabel,
+            components.startButton,
+            components.quitButton
+        );
         Scene startScene = new Scene(startLayout, 600, 400);
         primaryStage.setScene(startScene);
         primaryStage.setTitle("Start Window");
         primaryStage.show();
 
-        startButton.setOnAction(e -> {
+        components.startButton.setOnAction(e -> {
             showMainWindow();
             primaryStage.close();
         });
+    }
+
+    private static class StartWindowComponents {
+        Label welcomeLabel;
+        Label instructionLabel;
+        Button startButton;
+        Button quitButton;
+        StartWindowComponents(Label welcomeLabel, Label instructionLabel, Button startButton, Button quitButton) {
+            this.welcomeLabel = welcomeLabel;
+            this.instructionLabel = instructionLabel;
+            this.startButton = startButton;
+            this.quitButton = quitButton;
+        }
+    }
+
+    private StartWindowComponents createStartWindowComponents() {
+        Label welcomeLabel = new Label("Welcome to the Concurrent Word Counter");
+        welcomeLabel.setFont(new Font("Arial", 28));
+        welcomeLabel.setAlignment(Pos.CENTER);
+
+        Label instructionLabel = new Label("Click Start to continue.");
+        instructionLabel.setFont(new Font("Arial", 28));
+        instructionLabel.setAlignment(Pos.CENTER);
+
+        Button startButton = new Button("Start");
+        startButton.setFont(new Font("Arial", 24));
+        Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
+        quitButton.setFont(new Font("Arial", 18));
+
+        return new StartWindowComponents(welcomeLabel, instructionLabel, startButton, quitButton);
     }
 
     private void showMainWindow() {
