@@ -46,4 +46,29 @@ class WordCounterTest {
         assertEquals(1, wordCount.get("world"));
         assertEquals(15, totalCharacterCount.get()); // "hello" (5) + "world" (5) + "hello" (5)
     }
+
+    @Test
+    void testTotalCharacterCountThreadSafety() throws Exception {
+        File tempFile1 = File.createTempFile("testfile1", ".txt");
+        File tempFile2 = File.createTempFile("testfile2", ".txt");
+        try (PrintWriter out1 = new PrintWriter(tempFile1); PrintWriter out2 = new PrintWriter(tempFile2)) {
+            out1.println("Alpha beta gamma"); // 5 + 4 + 5 = 14
+            out2.println("Delta epsilon");    // 5 + 7 = 12
+        }
+        ConcurrentHashMap<String, Integer> wc = new ConcurrentHashMap<>();
+        AtomicInteger tc = new AtomicInteger(0);
+        Thread t1 = new Thread(() -> {
+            try { WordCounter.countWordsInFile(tempFile1, wc, tc); } catch (FileNotFoundException ignored) {}
+        });
+        Thread t2 = new Thread(() -> {
+            try { WordCounter.countWordsInFile(tempFile2, wc, tc); } catch (FileNotFoundException ignored) {}
+        });
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        assertEquals(26, tc.get()); // 14 + 12
+        tempFile1.delete();
+        tempFile2.delete();
+    }
 } 
