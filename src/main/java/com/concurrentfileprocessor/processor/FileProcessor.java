@@ -6,9 +6,9 @@ import static com.concurrentfileprocessor.ConcurrentFileProcessor.wordCount;
 import com.concurrentfileprocessor.tasks.OutputWriter;
 import com.concurrentfileprocessor.threading.ThreadDelegator;
 
-public class WordCountProcessor {
+public class FileProcessor {
     public static void processFiles(){
         ThreadDelegator.delegateTasks();
-        OutputWriter.outputWordsToFile(outputFilePath, wordCount, totalCharacterCount);
+        OutputWriter.outputStatsToFile(outputFilePath, wordCount, totalCharacterCount);
     }
 }
