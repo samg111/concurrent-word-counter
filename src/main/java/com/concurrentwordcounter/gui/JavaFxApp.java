@@ -24,6 +24,8 @@ public class JavaFxApp extends Application{
     private void showStartWindow(Stage primaryStage) {
         VBox startLayout = new VBox(20);
         startLayout.setAlignment(Pos.CENTER);
+        startLayout.setPrefSize(600, 400);
+        startLayout.setStyle("-fx-background-color: #64748b;");
         StartWindowComponents components = createStartWindowComponents();
         startLayout.getChildren().addAll(
             components.welcomeLabel,
@@ -32,6 +34,7 @@ public class JavaFxApp extends Application{
             components.quitButton
         );
         Scene startScene = new Scene(startLayout, 600, 400);
+        startScene.getRoot().setStyle("-fx-background-color: #64748b;");
         primaryStage.setScene(startScene);
         primaryStage.setTitle("Start Window");
         primaryStage.show();
@@ -80,6 +83,7 @@ public class JavaFxApp extends Application{
         VBox bottomPane = PaneCreator.createBottomPane();
         HBox centerPane = PaneCreator.createCenterPane(leftPane, rightPane);
         BorderPane root = PaneCreator.createRoot(welcomeLabel, centerPane, bottomPane);
+        root.setStyle("-fx-background-color: #64748b;");
         Scene scene = new Scene(root, 1280, 720);
         mainStage.setTitle("Concurrent Word Counter");
         mainStage.setScene(scene);
