@@ -34,10 +34,11 @@ class WordCountProcessorTest {
             out.println("dog mouse cat");
         }
         tempFiles.add(file2);
-        com.concurrentwordcounter.ConcurrentWordCounter.inputFiles = tempFiles;
-        com.concurrentwordcounter.ConcurrentWordCounter.wordCount = new ConcurrentHashMap<>();
+        ConcurrentWordCounter.inputFiles = tempFiles;
+        ConcurrentWordCounter.wordCount = new ConcurrentHashMap<>();
+        ConcurrentWordCounter.totalCharacterCount = new java.util.concurrent.atomic.AtomicInteger(0);
         outputFile = File.createTempFile("output", ".txt");
-        com.concurrentwordcounter.ConcurrentWordCounter.outputFilePath = outputFile.getAbsolutePath();
+        ConcurrentWordCounter.outputFilePath = outputFile.getAbsolutePath();
     }
 
     @AfterEach
@@ -55,7 +56,8 @@ class WordCountProcessorTest {
     void testProcessFilesIntegration() throws IOException {
         WordCountProcessor.processFiles();
         List<String> lines = Files.readAllLines(outputFile.toPath());
-        assertEquals(3, lines.size());
+        assertEquals(4, lines.size());
+        assertTrue(lines.get(0).startsWith("Total character count:"));
         assertTrue(lines.contains("cat: 3"));
         assertTrue(lines.contains("dog: 2"));
         assertTrue(lines.contains("mouse: 1"));
