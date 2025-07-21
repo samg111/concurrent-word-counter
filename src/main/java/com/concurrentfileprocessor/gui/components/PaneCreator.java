@@ -5,7 +5,7 @@ import java.util.List;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
-import com.concurrentfileprocessor.processor.WordCountProcessor;
+import com.concurrentfileprocessor.processor.FileProcessor;
 
 import javafx.application.Platform;
 import javafx.geometry.Pos;
@@ -82,7 +82,7 @@ public class PaneCreator {
     }
 
     public static VBox createBottomPane() {
-        Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {WordCountProcessor.processFiles();});
+        Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {FileProcessor.processFiles();});
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
         runButton.setFont(new Font("Arial", 28));
         quitButton.setFont(new Font("Arial", 22));

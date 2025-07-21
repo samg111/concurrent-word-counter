@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import com.concurrentfileprocessor.ConcurrentFileProcessor;
-import com.concurrentfileprocessor.processor.WordCountProcessor;
+import com.concurrentfileprocessor.processor.FileProcessor;
 
 public class HeadlessRunner {
     public static void run() {
@@ -28,7 +28,7 @@ public class HeadlessRunner {
             return;
         }
         
-        WordCountProcessor.processFiles();
+        FileProcessor.processFiles();
         System.out.println("Total character count: " + ConcurrentFileProcessor.totalCharacterCount.get());
     }
     
