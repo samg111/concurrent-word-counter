@@ -1,16 +1,16 @@
-package com.concurrentwordcounter.tasks;
+package com.concurrentfileprocessor.tasks;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class WordCounter implements Runnable {
+public class FileStatCounter implements Runnable {
     private final File file;
     private final ConcurrentHashMap<String, Integer> wordCount;
     private final AtomicInteger totalCharacterCount;
 
-    public WordCounter(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) {
+    public FileStatCounter(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) {
         this.file = file;
         this.wordCount = wordCount;
         this.totalCharacterCount = totalCharacterCount;
@@ -19,13 +19,13 @@ public class WordCounter implements Runnable {
     @Override
     public void run() {
         try {
-            countWordsInFile(file, wordCount, totalCharacterCount);
+            countFileComponents(file, wordCount, totalCharacterCount);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    public static void countWordsInFile(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) throws FileNotFoundException {
+    public static void countFileComponents(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) throws FileNotFoundException {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
                 String word = scanner.next().toLowerCase().replaceAll("[^a-z]", "");

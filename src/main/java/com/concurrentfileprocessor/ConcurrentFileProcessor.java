@@ -1,4 +1,4 @@
-package com.concurrentwordcounter;
+package com.concurrentfileprocessor;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.concurrentwordcounter.runners.GuiRunner;
-import com.concurrentwordcounter.runners.HeadlessRunner;
+import com.concurrentfileprocessor.runners.GuiRunner;
+import com.concurrentfileprocessor.runners.HeadlessRunner;
 
-public class ConcurrentWordCounter {
+public class ConcurrentFileProcessor {
     public static ConcurrentHashMap<String, Integer> wordCount;
     public static List<File> inputFiles;
     public static String outputFilePath;

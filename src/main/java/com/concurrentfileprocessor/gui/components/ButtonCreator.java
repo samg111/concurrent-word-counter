@@ -1,4 +1,4 @@
-package com.concurrentwordcounter.gui.components;
+package com.concurrentfileprocessor.gui.components;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

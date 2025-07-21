@@ -1,4 +1,4 @@
-package com.concurrentwordcounter;
+package com.concurrentfileprocessor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.concurrentwordcounter.tasks.WordCounter;
+import com.concurrentfileprocessor.tasks.FileStatCounter;
 
-class WordCounterTest {
+class FileStatCounterTest {
     private File tempFile;
     private ConcurrentHashMap<String, Integer> wordCount;
     private AtomicInteger totalCharacterCount;
@@ -40,7 +40,7 @@ class WordCounterTest {
 
     @Test
     void testCountWordsInFile() throws FileNotFoundException {
-        WordCounter.countWordsInFile(tempFile, wordCount, totalCharacterCount);
+        FileStatCounter.countFileComponents(tempFile, wordCount, totalCharacterCount);
         assertEquals(2, wordCount.size());
         assertEquals(2, wordCount.get("hello"));
         assertEquals(1, wordCount.get("world"));
@@ -58,10 +58,10 @@ class WordCounterTest {
         ConcurrentHashMap<String, Integer> wc = new ConcurrentHashMap<>();
         AtomicInteger tc = new AtomicInteger(0);
         Thread t1 = new Thread(() -> {
-            try { WordCounter.countWordsInFile(tempFile1, wc, tc); } catch (FileNotFoundException ignored) {}
+            try { FileStatCounter.countFileComponents(tempFile1, wc, tc); } catch (FileNotFoundException ignored) {}
         });
         Thread t2 = new Thread(() -> {
-            try { WordCounter.countWordsInFile(tempFile2, wc, tc); } catch (FileNotFoundException ignored) {}
+            try { FileStatCounter.countFileComponents(tempFile2, wc, tc); } catch (FileNotFoundException ignored) {}
         });
         t1.start();
         t2.start();

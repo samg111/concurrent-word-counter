@@ -1,4 +1,4 @@
-package com.concurrentwordcounter;
+package com.concurrentfileprocessor;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.concurrentwordcounter.tasks.OutputWriter;
+import com.concurrentfileprocessor.tasks.OutputWriter;
 
 public class OutputWriterTest {
     private File tempFile;
@@ -39,7 +39,7 @@ public class OutputWriterTest {
 
     @Test
     void testOutputWordsToFile() throws IOException {
-        OutputWriter.outputWordsToFile(tempFile.getAbsolutePath(), wordCount, totalCharacterCount);
+        OutputWriter.outputStatsToFile(tempFile.getAbsolutePath(), wordCount, totalCharacterCount);
         List<String> lines = java.nio.file.Files.readAllLines(tempFile.toPath());
         assertEquals(3, lines.size());
         assertTrue(lines.get(0).equals("Total character count: 15"));
