@@ -29,6 +29,7 @@ public class HeadlessRunner {
         }
         
         WordCountProcessor.processFiles();
+        System.out.println("Total character count: " + ConcurrentWordCounter.totalCharacterCount.get());
     }
     
     private static String getOutputFileName() {
