@@ -31,8 +31,9 @@ class ThreadDelegatorTest {
             out.println("banana orange apple");
         }
         tempFiles.add(file2);
-        com.concurrentwordcounter.ConcurrentWordCounter.inputFiles = tempFiles;
-        com.concurrentwordcounter.ConcurrentWordCounter.wordCount = new ConcurrentHashMap<>();
+        ConcurrentWordCounter.inputFiles = tempFiles;
+        ConcurrentWordCounter.wordCount = new ConcurrentHashMap<>();
+        ConcurrentWordCounter.totalCharacterCount = new java.util.concurrent.atomic.AtomicInteger(0);
     }
 
     @AfterEach
@@ -46,7 +47,7 @@ class ThreadDelegatorTest {
     @Test
     void testDelegateTasksCountsWordsConcurrently() {
         ThreadDelegator.delegateTasks();
-        ConcurrentHashMap<String, Integer> wordCount = com.concurrentwordcounter.ConcurrentWordCounter.wordCount;
+        ConcurrentHashMap<String, Integer> wordCount = ConcurrentWordCounter.wordCount;
         assertEquals(3, wordCount.size());
         assertEquals(3, wordCount.get("apple"));
         assertEquals(2, wordCount.get("banana"));
