@@ -28,7 +28,7 @@ input_files/*
 !input_files/Moby Dick; Or, The Whale by Herman Melville.txt
 
 # Output files
-word_count_output.txt
+processed_files_stats.txt
 
 # Maven target directory (generated build output)
 target/

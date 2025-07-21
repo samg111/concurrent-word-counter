@@ -50,8 +50,8 @@ public class PaneCreator {
     }
 
     public static VBox createRightPane(Stage primaryStage) {
-        outputFilePath = "concurrent-word-counter-output.txt";
-        Label outputLabel = new Label("Select output directory and choose a file name");
+        outputFilePath = "processed_files_stats.txt";
+        Label outputLabel = new Label("Select output directory and choose a file name (default: processed_files_stats.txt)");
         TextField fileNameTextField = new TextField();
         Button outputDirectoryButton = ButtonCreator.createButton("Select output directory", (event) -> {
             String textFieldContents = fileNameTextField.getText();
@@ -82,7 +82,7 @@ public class PaneCreator {
     }
 
     public static VBox createBottomPane() {
-        Button runButton = ButtonCreator.createButton("Run the Word Counter", (event) -> {FileProcessor.processFiles();});
+        Button runButton = ButtonCreator.createButton("Run the File Processor", (event) -> {FileProcessor.processFiles();});
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
         runButton.setFont(new Font("Arial", 28));
         quitButton.setFont(new Font("Arial", 22));
