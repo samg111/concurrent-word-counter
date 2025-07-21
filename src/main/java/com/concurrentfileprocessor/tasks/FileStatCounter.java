@@ -5,12 +5,12 @@ import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class WordCounter implements Runnable {
+public class FileStatCounter implements Runnable {
     private final File file;
     private final ConcurrentHashMap<String, Integer> wordCount;
     private final AtomicInteger totalCharacterCount;
 
-    public WordCounter(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) {
+    public FileStatCounter(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) {
         this.file = file;
         this.wordCount = wordCount;
         this.totalCharacterCount = totalCharacterCount;
