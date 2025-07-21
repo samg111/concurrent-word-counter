@@ -39,7 +39,7 @@ public class OutputWriterTest {
 
     @Test
     void testOutputWordsToFile() throws IOException {
-        OutputWriter.outputWordsToFile(tempFile.getAbsolutePath(), wordCount, totalCharacterCount);
+        OutputWriter.outputStatsToFile(tempFile.getAbsolutePath(), wordCount, totalCharacterCount);
         List<String> lines = java.nio.file.Files.readAllLines(tempFile.toPath());
         assertEquals(3, lines.size());
         assertTrue(lines.get(0).equals("Total character count: 15"));

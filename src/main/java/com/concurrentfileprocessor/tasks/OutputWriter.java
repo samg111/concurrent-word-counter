@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class OutputWriter {
-    public static void outputWordsToFile(String outputFilePath, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) {
+    public static void outputStatsToFile(String outputFilePath, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) {
         try (java.io.PrintWriter writer = new java.io.PrintWriter(outputFilePath)) {
             writer.println("Total character count: " + totalCharacterCount.get());
             for (String word : wordCount.keySet()) {

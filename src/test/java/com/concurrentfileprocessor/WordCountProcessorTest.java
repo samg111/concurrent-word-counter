@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.concurrentfileprocessor.processor.WordCountProcessor;
+import com.concurrentfileprocessor.processor.FileProcessor;
 
 class WordCountProcessorTest {
     private List<File> tempFiles;
@@ -54,7 +54,7 @@ class WordCountProcessorTest {
 
     @Test
     void testProcessFilesIntegration() throws IOException {
-        WordCountProcessor.processFiles();
+        FileProcessor.processFiles();
         List<String> lines = Files.readAllLines(outputFile.toPath());
         assertEquals(4, lines.size());
         assertTrue(lines.get(0).startsWith("Total character count:"));
