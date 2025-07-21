@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.concurrentfileprocessor.ConcurrentFileProcessor;
 import com.concurrentfileprocessor.threading.ThreadDelegator;
 
 class ThreadDelegatorTest {
