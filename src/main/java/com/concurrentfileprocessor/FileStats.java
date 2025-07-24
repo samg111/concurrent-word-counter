@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class FileStats {
     public ConcurrentHashMap<String, Integer> wordCount;
     public AtomicInteger totalCharacterCount;
+    public int numberOfFiles;
 
     public FileStats(ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount) {
         this.wordCount = wordCount;
