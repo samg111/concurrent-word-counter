@@ -59,8 +59,11 @@ class WordCountProcessorTest {
     void testProcessFilesIntegration() throws IOException {
         FileProcessor.processFiles();
         List<String> lines = Files.readAllLines(outputFile.toPath());
-        assertEquals(4, lines.size());
-        assertTrue(lines.get(0).startsWith("Total character count:"));
+        assertEquals(7, lines.size());
+        assertEquals("Number of files: 2", lines.get(0));
+        assertTrue(lines.get(1).startsWith("Total character count:"));
+        assertEquals("", lines.get(2));
+        assertEquals("Individual word count:", lines.get(3));
         assertTrue(lines.contains("cat: 3"));
         assertTrue(lines.contains("dog: 2"));
         assertTrue(lines.contains("mouse: 1"));

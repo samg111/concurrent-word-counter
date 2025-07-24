@@ -43,8 +43,11 @@ public class OutputWriterTest {
         fileStats = new FileStats(wordCount, totalCharacterCount);
         OutputWriter.outputStatsToFile(tempFile.getAbsolutePath(), fileStats);
         List<String> lines = java.nio.file.Files.readAllLines(tempFile.toPath());
-        assertEquals(3, lines.size());
-        assertTrue(lines.get(0).equals("Total character count: 15"));
+        assertEquals(6, lines.size());
+        assertTrue(lines.get(0).startsWith("Number of files:"));
+        assertEquals("Total character count: 15", lines.get(1));
+        assertEquals("", lines.get(2));
+        assertEquals("Individual word count:", lines.get(3));
         assertTrue(lines.contains("hello: 2"));
         assertTrue(lines.contains("world: 1"));
     }
