@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.concurrentfileprocessor.tasks.FileStatCounter;
+import com.concurrentfileprocessor.tasks.FileMetricsCollector;
 
 class FileStatCounterTest {
     private File tempFile;
@@ -40,7 +40,7 @@ class FileStatCounterTest {
 
     @Test
     void testCountWordsInFile() throws FileNotFoundException {
-        FileStatCounter.countFileComponents(tempFile, wordCount, totalCharacterCount);
+        FileMetricsCollector.countFileComponents(tempFile, wordCount, totalCharacterCount);
         assertEquals(2, wordCount.size());
         assertEquals(2, wordCount.get("hello"));
         assertEquals(1, wordCount.get("world"));
@@ -58,10 +58,10 @@ class FileStatCounterTest {
         ConcurrentHashMap<String, Integer> wc = new ConcurrentHashMap<>();
         AtomicInteger tc = new AtomicInteger(0);
         Thread t1 = new Thread(() -> {
-            try { FileStatCounter.countFileComponents(tempFile1, wc, tc); } catch (FileNotFoundException ignored) {}
+            try { FileMetricsCollector.countFileComponents(tempFile1, wc, tc); } catch (FileNotFoundException ignored) {}
         });
         Thread t2 = new Thread(() -> {
-            try { FileStatCounter.countFileComponents(tempFile2, wc, tc); } catch (FileNotFoundException ignored) {}
+            try { FileMetricsCollector.countFileComponents(tempFile2, wc, tc); } catch (FileNotFoundException ignored) {}
         });
         t1.start();
         t2.start();

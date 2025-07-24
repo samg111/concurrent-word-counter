@@ -7,12 +7,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.concurrentfileprocessor.FileStats;
 
-public class FileStatCounter implements Runnable {
+public class FileMetricsCollector implements Runnable {
     private final File file;
     private final ConcurrentHashMap<String, Integer> wordCount;
     private final AtomicInteger totalCharacterCount;
 
-    public FileStatCounter(File file, FileStats fileStats) {
+    public FileMetricsCollector(File file, FileStats fileStats) {
         this.file = file;
         this.wordCount = fileStats.wordCount;
         this.totalCharacterCount = fileStats.totalCharacterCount;

@@ -2,7 +2,7 @@ package com.concurrentfileprocessor.threading;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
-import com.concurrentfileprocessor.tasks.FileStatCounter;
+import com.concurrentfileprocessor.tasks.FileMetricsCollector;
 
 public class ThreadDelegator {
     public static void delegateTasks(){
@@ -10,7 +10,7 @@ public class ThreadDelegator {
         fileStats.numberOfFiles = numberOfFiles;
         Thread[] threads = new Thread[numberOfFiles];
         for (int i = 0; i < numberOfFiles; i++) {
-            threads[i] = new Thread(new FileStatCounter(inputFiles.get(i), fileStats));
+            threads[i] = new Thread(new FileMetricsCollector(inputFiles.get(i), fileStats));
             threads[i].start();
         }
         for  (Thread thread : threads) {
