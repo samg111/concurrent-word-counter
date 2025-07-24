@@ -10,14 +10,16 @@ import com.concurrentfileprocessor.runners.GuiRunner;
 import com.concurrentfileprocessor.runners.HeadlessRunner;
 
 public class ConcurrentFileProcessor {
-    public static ConcurrentHashMap<String, Integer> wordCount;
+    public static FileStats fileStats;
     public static List<File> inputFiles;
     public static String outputFilePath;
-    public static AtomicInteger totalCharacterCount;
+    
     public static void main(String[] args) {
-        wordCount = new ConcurrentHashMap<>();
+        fileStats = new FileStats();
+        fileStats.wordCount = new ConcurrentHashMap<>();
+        fileStats.totalCharacterCount = new AtomicInteger(0);
         inputFiles = new ArrayList<>();
-        totalCharacterCount = new AtomicInteger(0);
+        outputFilePath = "processed_files_stats.txt";
         if (args.length > 0 && args[0].equals("--headless")) {
             HeadlessRunner.run();
         } else {

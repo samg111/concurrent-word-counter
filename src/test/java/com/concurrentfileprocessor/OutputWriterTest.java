@@ -18,6 +18,7 @@ public class OutputWriterTest {
     private File tempFile;
     private ConcurrentHashMap<String, Integer> wordCount;
     private AtomicInteger totalCharacterCount;
+    private FileStats fileStats;
 
     @BeforeEach
     @SuppressWarnings("unused")
@@ -39,7 +40,8 @@ public class OutputWriterTest {
 
     @Test
     void testOutputWordsToFile() throws IOException {
-        OutputWriter.outputStatsToFile(tempFile.getAbsolutePath(), wordCount, totalCharacterCount);
+        fileStats = new FileStats(wordCount, totalCharacterCount);
+        OutputWriter.outputStatsToFile(tempFile.getAbsolutePath(), fileStats);
         List<String> lines = java.nio.file.Files.readAllLines(tempFile.toPath());
         assertEquals(3, lines.size());
         assertTrue(lines.get(0).equals("Total character count: 15"));

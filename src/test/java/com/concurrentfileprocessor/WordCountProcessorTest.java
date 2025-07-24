@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
 import com.concurrentfileprocessor.processor.FileProcessor;
 
 class WordCountProcessorTest {
@@ -34,11 +38,10 @@ class WordCountProcessorTest {
             out.println("dog mouse cat");
         }
         tempFiles.add(file2);
-        ConcurrentFileProcessor.inputFiles = tempFiles;
-        ConcurrentFileProcessor.wordCount = new ConcurrentHashMap<>();
-        ConcurrentFileProcessor.totalCharacterCount = new java.util.concurrent.atomic.AtomicInteger(0);
+        inputFiles = tempFiles;
+        fileStats = new FileStats(new ConcurrentHashMap<>(), new AtomicInteger(0));
         outputFile = File.createTempFile("output", ".txt");
-        ConcurrentFileProcessor.outputFilePath = outputFile.getAbsolutePath();
+        outputFilePath = outputFile.getAbsolutePath();
     }
 
     @AfterEach

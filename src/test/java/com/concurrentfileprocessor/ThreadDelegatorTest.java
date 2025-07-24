@@ -6,12 +6,15 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
 import com.concurrentfileprocessor.threading.ThreadDelegator;
 
 class ThreadDelegatorTest {
@@ -31,9 +34,8 @@ class ThreadDelegatorTest {
             out.println("banana orange apple");
         }
         tempFiles.add(file2);
-        ConcurrentFileProcessor.inputFiles = tempFiles;
-        ConcurrentFileProcessor.wordCount = new ConcurrentHashMap<>();
-        ConcurrentFileProcessor.totalCharacterCount = new java.util.concurrent.atomic.AtomicInteger(0);
+        inputFiles = tempFiles;
+        fileStats = new FileStats(new ConcurrentHashMap<>(), new AtomicInteger(0));
     }
 
     @AfterEach
@@ -47,7 +49,7 @@ class ThreadDelegatorTest {
     @Test
     void testDelegateTasksCountsWordsConcurrently() {
         ThreadDelegator.delegateTasks();
-        ConcurrentHashMap<String, Integer> wordCount = ConcurrentFileProcessor.wordCount;
+        ConcurrentHashMap<String, Integer> wordCount = fileStats.wordCount;
         assertEquals(3, wordCount.size());
         assertEquals(3, wordCount.get("apple"));
         assertEquals(2, wordCount.get("banana"));

@@ -1,14 +1,13 @@
 package com.concurrentfileprocessor.processor;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.totalCharacterCount;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.wordCount;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import com.concurrentfileprocessor.tasks.OutputWriter;
 import com.concurrentfileprocessor.threading.ThreadDelegator;
 
 public class FileProcessor {
     public static void processFiles(){
         ThreadDelegator.delegateTasks();
-        OutputWriter.outputStatsToFile(outputFilePath, wordCount, totalCharacterCount);
+        OutputWriter.outputStatsToFile(outputFilePath, fileStats);
     }
 }

@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import com.concurrentfileprocessor.ConcurrentFileProcessor;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
 import com.concurrentfileprocessor.processor.FileProcessor;
 
 public class HeadlessRunner {
@@ -12,24 +14,24 @@ public class HeadlessRunner {
         System.out.println("Running in headless mode");
         
         String outputFileName = getOutputFileName();
-        ConcurrentFileProcessor.outputFilePath = outputFileName;
+        outputFilePath = outputFileName;
         
         File inputDirectory = new File("input_files");
         if (inputDirectory.exists() && inputDirectory.isDirectory()) {
             File[] files = inputDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
             if (files != null) {
-                ConcurrentFileProcessor.inputFiles.addAll(Arrays.asList(files));
-                System.out.println("Loaded " + ConcurrentFileProcessor.inputFiles.size() + " input files");
+                inputFiles.addAll(Arrays.asList(files));
+                System.out.println("Loaded " + inputFiles.size() + " input files");
             }
         }
         
-        if (ConcurrentFileProcessor.inputFiles.isEmpty()) {
+        if (inputFiles.isEmpty()) {
             System.err.println("No input files found in input_files directory");
             return;
         }
         
         FileProcessor.processFiles();
-        System.out.println("Total character count: " + ConcurrentFileProcessor.totalCharacterCount.get());
+        System.out.println("Total character count: " + fileStats.totalCharacterCount.get());
     }
     
     private static String getOutputFileName() {
