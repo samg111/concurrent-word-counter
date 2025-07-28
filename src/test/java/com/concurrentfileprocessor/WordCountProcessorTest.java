@@ -39,7 +39,7 @@ class WordCountProcessorTest {
         }
         tempFiles.add(file2);
         inputFiles = tempFiles;
-        fileStats = new FileStats(new ConcurrentHashMap<>(), new AtomicInteger(0));
+        fileStats = new FileStats(new ConcurrentHashMap<>(), new AtomicInteger(0), new AtomicInteger(0));
         outputFile = File.createTempFile("output", ".txt");
         outputFilePath = outputFile.getAbsolutePath();
     }
@@ -59,11 +59,12 @@ class WordCountProcessorTest {
     void testProcessFilesIntegration() throws IOException {
         FileProcessor.processFiles();
         List<String> lines = Files.readAllLines(outputFile.toPath());
-        assertEquals(7, lines.size());
+        assertEquals(8, lines.size());
         assertEquals("Number of files: 2", lines.get(0));
         assertTrue(lines.get(1).startsWith("Total character count:"));
-        assertEquals("", lines.get(2));
-        assertEquals("Individual word count:", lines.get(3));
+        assertTrue(lines.get(2).startsWith("Total line count: 1"));
+        assertEquals("", lines.get(3));
+        assertEquals("Individual word count:", lines.get(4));
         assertTrue(lines.contains("cat: 3"));
         assertTrue(lines.contains("dog: 2"));
         assertTrue(lines.contains("mouse: 1"));

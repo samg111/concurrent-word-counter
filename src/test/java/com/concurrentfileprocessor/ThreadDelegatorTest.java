@@ -35,7 +35,7 @@ class ThreadDelegatorTest {
         }
         tempFiles.add(file2);
         inputFiles = tempFiles;
-        fileStats = new FileStats(new ConcurrentHashMap<>(), new AtomicInteger(0));
+        fileStats = new FileStats(new ConcurrentHashMap<>(), new AtomicInteger(0), new AtomicInteger(0));
     }
 
     @AfterEach
