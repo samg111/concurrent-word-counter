@@ -62,7 +62,7 @@ class WordCountProcessorTest {
         assertEquals(8, lines.size());
         assertEquals("Number of files: 2", lines.get(0));
         assertTrue(lines.get(1).startsWith("Total character count:"));
-        assertTrue(lines.get(2).startsWith("Total line count: 1"));
+        assertTrue(lines.get(2).startsWith("Total line count: 2"));
         assertEquals("", lines.get(3));
         assertEquals("Individual word count:", lines.get(4));
         assertTrue(lines.contains("cat: 3"));

@@ -40,14 +40,15 @@ public class OutputWriterTest {
 
     @Test
     void testOutputWordsToFile() throws IOException {
-        fileStats = new FileStats(wordCount, totalCharacterCount);
+        fileStats = new FileStats(wordCount, totalCharacterCount, new AtomicInteger(0));
         OutputWriter.outputStatsToFile(tempFile.getAbsolutePath(), fileStats);
         List<String> lines = java.nio.file.Files.readAllLines(tempFile.toPath());
-        assertEquals(6, lines.size());
+        assertEquals(7, lines.size());
         assertTrue(lines.get(0).startsWith("Number of files:"));
         assertEquals("Total character count: 15", lines.get(1));
-        assertEquals("", lines.get(2));
-        assertEquals("Individual word count:", lines.get(3));
+        assertEquals("Total line count: 0", lines.get(2));
+        assertEquals("", lines.get(3));
+        assertEquals("Individual word count:", lines.get(4));
         assertTrue(lines.contains("hello: 2"));
         assertTrue(lines.contains("world: 1"));
     }
