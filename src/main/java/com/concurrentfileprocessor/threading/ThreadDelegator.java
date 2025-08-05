@@ -1,15 +1,16 @@
 package com.concurrentfileprocessor.threading;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.totalCharacterCount;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.wordCount;
-import com.concurrentfileprocessor.tasks.FileStatCounter;
+import com.concurrentfileprocessor.tasks.FileMetricsCollector;
 
 public class ThreadDelegator {
     public static void delegateTasks(){
-        Thread[] threads = new Thread[inputFiles.size()];
-        for (int i = 0; i < inputFiles.size(); i++) {
-            threads[i] = new Thread(new FileStatCounter(inputFiles.get(i), wordCount, totalCharacterCount));
+        int numberOfFiles = inputFiles.size();
+        fileStats.numberOfFiles = numberOfFiles;
+        Thread[] threads = new Thread[numberOfFiles];
+        for (int i = 0; i < numberOfFiles; i++) {
+            threads[i] = new Thread(new FileMetricsCollector(inputFiles.get(i), fileStats));
             threads[i].start();
         }
         for  (Thread thread : threads) {

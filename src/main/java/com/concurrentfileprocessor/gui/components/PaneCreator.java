@@ -50,7 +50,6 @@ public class PaneCreator {
     }
 
     public static VBox createRightPane(Stage primaryStage) {
-        outputFilePath = "processed_files_stats.txt";
         Label outputLabel = new Label("Select output directory and choose a file name (default: processed_files_stats.txt)");
         TextField fileNameTextField = new TextField();
         Button outputDirectoryButton = ButtonCreator.createButton("Select output directory", (event) -> {
