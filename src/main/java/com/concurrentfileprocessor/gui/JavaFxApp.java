@@ -59,8 +59,8 @@ public class JavaFxApp extends Application{
     }
 
     private StartWindowComponents createStartWindowComponents() {
-            Label welcomeLabel = new Label("Welcome to the Concurrent File Processor");
-            welcomeLabel.setFont(new Font("Arial", 28));
+        Label welcomeLabel = new Label("Welcome to the Concurrent File Processor");
+        welcomeLabel.setFont(new Font("Arial", 28));
         welcomeLabel.setAlignment(Pos.CENTER);
 
         Label instructionLabel = new Label("Click Start to continue.");
@@ -93,7 +93,7 @@ public class JavaFxApp extends Application{
         mainStage.setResizable(true);
         
         mainStage.centerOnScreen();
-        mainStage.setAlwaysOnTop(true);
         mainStage.show();
+        Platform.runLater(() -> mainStage.toFront());
     }
 }
