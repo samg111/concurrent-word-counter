@@ -4,8 +4,6 @@ import com.concurrentfileprocessor.gui.windows.components.StartWindowComponents;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -25,7 +23,7 @@ public class StartWindow {
         startLayout.setStyle("-fx-background-color: #64748b;");
 
         StartWindowComponents components = StartWindowComponents.createStartWindowComponents();
-        components.startButton.setOnAction(e -> controller.showMainWindow());
+        components.startButton.setOnAction(e -> controller.showMainWindow(stage));
         startLayout.getChildren().addAll(
             components.welcomeLabel,
             components.instructionLabel,
