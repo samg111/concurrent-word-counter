@@ -13,4 +13,9 @@ public class Controller {
         StartWindow startWindow = new StartWindow(this, primaryStage);
         startWindow.show();
     }
+
+    public void showMainWindow(Stage primaryStage) {
+        MainWindow mainWindow = new MainWindow(this, primaryStage);
+        mainWindow.show();
+    }
 }
