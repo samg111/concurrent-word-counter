@@ -1,4 +1,4 @@
-package com.concurrentfileprocessor.gui.components;
+package com.concurrentfileprocessor.gui.windows.components;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
