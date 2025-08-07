@@ -1,10 +1,11 @@
-package com.concurrentfileprocessor.gui.components;
+package com.concurrentfileprocessor.gui.windows;
 
 import java.io.File;
 import java.util.List;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
+import com.concurrentfileprocessor.gui.windows.components.ButtonCreator;
 import com.concurrentfileprocessor.processor.FileProcessor;
 
 import javafx.application.Platform;
@@ -81,7 +82,7 @@ public class PaneCreator {
     }
 
     public static VBox createBottomPane() {
-        Button runButton = ButtonCreator.createButton("Run the File Processor", (event) -> {FileProcessor.processFiles();});
+        Button runButton = ButtonCreator.createButton("Process Files", (event) -> {FileProcessor.processFiles();});
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
         runButton.setFont(new Font("Arial", 28));
         quitButton.setFont(new Font("Arial", 22));
