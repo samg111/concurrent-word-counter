@@ -20,11 +20,6 @@ public class OutputWindow {
     
     public void show() {
         Platform.runLater(() -> {
-            Stage resultsStage = new Stage();
-            resultsStage.setTitle("Results Window");
-            resultsStage.setWidth(400);
-            resultsStage.setHeight(300);
-            
             VBox root = new VBox(20);
             root.setAlignment(Pos.CENTER);
             root.setStyle("-fx-background-color: #64748b;");
@@ -33,14 +28,15 @@ public class OutputWindow {
             label.setFont(new Font("Arial", 18));
             
             Button closeButton = new Button("Close");
-            closeButton.setOnAction(e -> resultsStage.close());
+            closeButton.setOnAction(e -> stage.close());
             
             root.getChildren().addAll(label, closeButton);
             
-            Scene scene = new Scene(root);
-            resultsStage.setScene(scene);
-            resultsStage.centerOnScreen();
-            resultsStage.show();
+            Scene scene = new Scene(root, 1280, 720);
+            stage.setTitle("Results Window");
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.show();
         });
     }
 } 
