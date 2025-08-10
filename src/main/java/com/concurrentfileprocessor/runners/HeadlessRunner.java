@@ -31,8 +31,8 @@ public class HeadlessRunner {
         }
         
         FileProcessor.processFiles();
-        System.out.println("Total character count: " + fileStats.totalCharacterCount.get());
-        System.out.println("Total line count: " + fileStats.totalLineCount.get());
+        System.out.println("Total character count: " + fileStats.characterCount.get());
+        System.out.println("Total line count: " + fileStats.lineCount.get());
     }
     
     private static String getOutputFileName() {

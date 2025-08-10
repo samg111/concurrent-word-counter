@@ -5,15 +5,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class FileStats {
     public ConcurrentHashMap<String, Integer> wordCount;
-    public AtomicInteger totalCharacterCount;
-    public AtomicInteger totalLineCount;
+    public AtomicInteger characterCount;
+    public AtomicInteger lineCount;
     public int numberOfFiles;
     
 
-    public FileStats(ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount, AtomicInteger totalLineCount) {
+    public FileStats(ConcurrentHashMap<String, Integer> wordCount, AtomicInteger characterCount, AtomicInteger lineCount) {
         this.wordCount = wordCount;
-        this.totalCharacterCount = totalCharacterCount;
-        this.totalLineCount = totalLineCount;
+        this.characterCount = characterCount;
+        this.lineCount = lineCount;
     }
 
     public FileStats() {}

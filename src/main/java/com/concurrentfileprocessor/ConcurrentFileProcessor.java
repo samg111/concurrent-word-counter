@@ -17,8 +17,8 @@ public class ConcurrentFileProcessor {
     public static void main(String[] args) {
         fileStats = new FileStats();
         fileStats.wordCount = new ConcurrentHashMap<>();
-        fileStats.totalCharacterCount = new AtomicInteger(0);
-        fileStats.totalLineCount = new AtomicInteger(0);
+        fileStats.characterCount = new AtomicInteger(0);
+        fileStats.lineCount = new AtomicInteger(0);
         inputFiles = new ArrayList<>();
         outputFilePath = "processed_files_stats.txt";
         if (args.length > 0 && args[0].equals("--headless")) {
