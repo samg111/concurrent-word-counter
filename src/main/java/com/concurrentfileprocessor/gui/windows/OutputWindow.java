@@ -11,11 +11,11 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class OutputWindow {
-    // private final Controller controller;
+    private final Controller controller;
     private final Stage stage;
 
     public OutputWindow(Controller controller, Stage stage) {
-        // this.controller = controller;
+        this.controller = controller;
         this.stage = stage;
     }
     
@@ -23,13 +23,17 @@ public class OutputWindow {
         OutputWindowComponents components = OutputWindowComponents.createOutputWindowLabels();
         components = OutputWindowComponents.createOutputWindowButtons(components);
 
+        components.backButton.setOnAction(event -> {
+            controller.showMainWindow(stage);
+        });
+
         VBox fileMetricsBox = new VBox(20);
         fileMetricsBox.setAlignment(Pos.CENTER);
         fileMetricsBox.getChildren().addAll(components.numOfFilesLabel, components.lineCountLabel, components.characterCountLabel, components.wordCountLabel);
 
         VBox navigationBox = new VBox(10);
         navigationBox.setAlignment(Pos.CENTER);
-        navigationBox.getChildren().addAll(components.quitButton);
+        navigationBox.getChildren().addAll(components.backButton, components.quitButton);
         
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #64748b;");

@@ -14,13 +14,15 @@ public class OutputWindowComponents {
     public Label lineCountLabel;
     public Label wordCountLabel;
     public Button quitButton;
+    public Button backButton;
 
-    public OutputWindowComponents(Label numOfFilesLabel, Label characterCountLabel, Label lineCountLabel, Label individualWordCountLabel, Button quitButton) {
+    public OutputWindowComponents(Label numOfFilesLabel, Label characterCountLabel, Label lineCountLabel, Label individualWordCountLabel, Button quitButton, Button backButton) {
         this.numOfFilesLabel = numOfFilesLabel;
         this.characterCountLabel = characterCountLabel;
         this.lineCountLabel = lineCountLabel;
         this.wordCountLabel = individualWordCountLabel;
         this.quitButton = quitButton;
+        this.backButton = backButton;
     }
 
     public static OutputWindowComponents createOutputWindowLabels(){
@@ -40,14 +42,20 @@ public class OutputWindowComponents {
         wordCountLabel.setFont(new Font("Arial", 20));
         wordCountLabel.setAlignment(Pos.CENTER);
 
-        return new OutputWindowComponents(numOfFilesLabel, characterCountLabel, lineCountLabel, wordCountLabel, null);
+        return new OutputWindowComponents(numOfFilesLabel, characterCountLabel, lineCountLabel, wordCountLabel, null, null);
     }
 
     public static OutputWindowComponents createOutputWindowButtons(OutputWindowComponents components){
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
         quitButton.setFont(new Font("Arial", 18));
 
+        Button backButton = ButtonCreator.createButton("Back to Main", (event) -> {
+            // event creation in OutputWindow.java
+        });
+        backButton.setFont(new Font("Arial", 18));
+
         components.quitButton = quitButton;
+        components.backButton = backButton;
 
         return components;
     }
