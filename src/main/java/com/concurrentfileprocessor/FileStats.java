@@ -17,4 +17,11 @@ public class FileStats {
     }
 
     public FileStats() {}
+
+    public FileStats refreshFileStats(FileStats stats){
+        stats.wordCount = new ConcurrentHashMap<>();
+        stats.characterCount = new AtomicInteger(0);
+        stats.lineCount = new AtomicInteger(0);
+        return stats;
+    }
 }
