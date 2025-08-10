@@ -1,43 +1,51 @@
 package com.concurrentfileprocessor.gui.windows;
 
-import javafx.application.Platform;
+import com.concurrentfileprocessor.gui.windows.components.OutputWindowComponents;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class OutputWindow {
-    private Controller controller;
-    private Stage stage;
+    // private final Controller controller;
+    private final Stage stage;
 
     public OutputWindow(Controller controller, Stage stage) {
-        this.controller = controller;
+        // this.controller = controller;
         this.stage = stage;
     }
     
     public void show() {
-        Platform.runLater(() -> {
-            VBox root = new VBox(20);
-            root.setAlignment(Pos.CENTER);
-            root.setStyle("-fx-background-color: #64748b;");
-            
-            Label label = new Label("Processing Complete");
-            label.setFont(new Font("Arial", 18));
-            
-            Button closeButton = new Button("Close");
-            closeButton.setOnAction(e -> stage.close());
-            
-            root.getChildren().addAll(label, closeButton);
-            
-            Scene scene = new Scene(root, 1280, 720);
-            stage.setTitle("Results Window");
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.show();
-        });
+        OutputWindowComponents components = OutputWindowComponents.createOutputWindowComponents();
+
+        VBox fileMetricsBox = new VBox(20);
+        fileMetricsBox.setAlignment(Pos.CENTER);
+        fileMetricsBox.getChildren().addAll(components.numOfFilesLabel, components.lineCountLabel, components.characterCountLabel, components.wordCountLabel);
+
+        VBox navigationBox = new VBox(10);
+        navigationBox.setAlignment(Pos.CENTER);
+        navigationBox.getChildren().addAll(components.quitButton);
+        
+        BorderPane root = new BorderPane();
+        root.setStyle("-fx-background-color: #64748b;");
+        root.setCenter(fileMetricsBox);
+        root.setBottom(navigationBox);
+
+        Scene scene = new Scene(root, 1280, 720);
+        stage.setTitle("Output Results Window");
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    public static Label createOutputLabels(String text) {
+        Label welcomeLabel = new Label(text);
+        welcomeLabel.setFont(new Font("Arial", 36));
+        return welcomeLabel;
     }
 } 
 
