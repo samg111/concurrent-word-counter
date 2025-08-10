@@ -1,5 +1,7 @@
 package com.concurrentfileprocessor.gui.windows.components;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
+
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -22,19 +24,19 @@ public class OutputWindowComponents {
     }
 
     public static OutputWindowComponents createOutputWindowComponents(){
-        Label numOfFilesLabel = new Label("number of files");
+        Label numOfFilesLabel = new Label("Number of files: " + fileStats.numberOfFiles);
         numOfFilesLabel.setFont(new Font("Arial", 20));
         numOfFilesLabel.setAlignment(Pos.CENTER);
 
-        Label characterCountLabel = new Label("total character count");
+        Label characterCountLabel = new Label("Total character count: " + fileStats.characterCount);
         characterCountLabel.setFont(new Font("Arial", 20));
         characterCountLabel.setAlignment(Pos.CENTER);
 
-        Label lineCountLabel = new Label("total line count");
+        Label lineCountLabel = new Label("Total line count: " + fileStats.lineCount);
         lineCountLabel.setFont(new Font("Arial", 20));
         lineCountLabel.setAlignment(Pos.CENTER);
 
-        Label wordCountLabel = new Label("total word count");
+        Label wordCountLabel = new Label("Total word count: " + fileStats.wordCount.size());
         wordCountLabel.setFont(new Font("Arial", 20));
         wordCountLabel.setAlignment(Pos.CENTER);
 
