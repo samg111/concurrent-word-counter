@@ -3,6 +3,7 @@ package com.concurrentfileprocessor.gui.windows;
 import java.io.File;
 import java.util.List;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
 import com.concurrentfileprocessor.gui.windows.components.ButtonCreator;
@@ -61,6 +62,18 @@ public class MainWindow {
 
     public static VBox createLeftPane(Stage primaryStage) {
         Label inputLabel = new Label("Select Input Files");
+        
+        if (inputFiles != null && !inputFiles.isEmpty()) {
+            String fileNames = "";
+            for (File file : inputFiles) {
+                String fileName = file.getName();
+                fileNames += fileName + "\n";
+            }
+            inputLabel.setText(fileNames);
+            inputLabel.setWrapText(true);
+            inputLabel.setFont(new Font("Arial", 16));
+        }
+        
         Button inputFileButton = ButtonCreator.createButton("Select input files", (event) -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Select Input Files");
@@ -88,6 +101,13 @@ public class MainWindow {
     public static VBox createRightPane(Stage primaryStage) {
         Label outputLabel = new Label("Select output directory and choose a file name (default: processed_files_stats.txt)");
         TextField fileNameTextField = new TextField();
+        
+        if (outputFilePath != null && !outputFilePath.equals("processed_files_stats.txt")) {
+            outputLabel.setText(outputFilePath);
+            outputLabel.setWrapText(true);
+            outputLabel.setFont(new Font("Arial", 16));
+        }
+        
         Button outputDirectoryButton = ButtonCreator.createButton("Select output directory", (event) -> {
             String textFieldContents = fileNameTextField.getText();
             DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -112,6 +132,7 @@ public class MainWindow {
 
     public VBox createBottomPane(Controller controller, Stage stage) {
         Button runButton = ButtonCreator.createButton("Process Files", (event) -> {
+            fileStats = fileStats.refreshFileStats(fileStats);
             FileProcessor.processFiles();
             controller.showOutputWindow(stage);
         });
