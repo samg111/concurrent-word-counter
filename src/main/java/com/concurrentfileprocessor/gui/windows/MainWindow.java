@@ -24,8 +24,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class MainWindow {
-    private Controller controller;
-    private Stage stage;
+    private final Controller controller;
+    private final Stage stage;
 
     public MainWindow(Controller controller, Stage stage) {
         this.controller = controller;
