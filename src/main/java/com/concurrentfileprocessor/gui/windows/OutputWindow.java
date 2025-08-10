@@ -20,7 +20,8 @@ public class OutputWindow {
     }
     
     public void show() {
-        OutputWindowComponents components = OutputWindowComponents.createOutputWindowComponents();
+        OutputWindowComponents components = OutputWindowComponents.createOutputWindowLabels();
+        components = OutputWindowComponents.createOutputWindowButtons(components);
 
         VBox fileMetricsBox = new VBox(20);
         fileMetricsBox.setAlignment(Pos.CENTER);

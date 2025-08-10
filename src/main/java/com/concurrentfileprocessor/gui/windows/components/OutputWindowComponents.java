@@ -23,7 +23,7 @@ public class OutputWindowComponents {
         this.quitButton = quitButton;
     }
 
-    public static OutputWindowComponents createOutputWindowComponents(){
+    public static OutputWindowComponents createOutputWindowLabels(){
         Label numOfFilesLabel = new Label("Number of files: " + fileStats.numberOfFiles);
         numOfFilesLabel.setFont(new Font("Arial", 20));
         numOfFilesLabel.setAlignment(Pos.CENTER);
@@ -40,9 +40,15 @@ public class OutputWindowComponents {
         wordCountLabel.setFont(new Font("Arial", 20));
         wordCountLabel.setAlignment(Pos.CENTER);
 
+        return new OutputWindowComponents(numOfFilesLabel, characterCountLabel, lineCountLabel, wordCountLabel, null);
+    }
+
+    public static OutputWindowComponents createOutputWindowButtons(OutputWindowComponents components){
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
         quitButton.setFont(new Font("Arial", 18));
 
-        return new OutputWindowComponents(numOfFilesLabel, characterCountLabel, lineCountLabel, wordCountLabel, quitButton);
+        components.quitButton = quitButton;
+
+        return components;
     }
 }
