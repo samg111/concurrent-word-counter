@@ -14,15 +14,18 @@ public class OutputWindowComponents {
     public Label lineCountLabel;
     public Label wordCountLabel;
     public Button quitButton;
-    public Button backButton;
+    public Button backMainButton;
+    public Button backStartButton;
 
-    public OutputWindowComponents(Label numOfFilesLabel, Label characterCountLabel, Label lineCountLabel, Label individualWordCountLabel, Button quitButton, Button backButton) {
+    public OutputWindowComponents(Label numOfFilesLabel, Label characterCountLabel, Label lineCountLabel, Label individualWordCountLabel, Button quitButton, 
+                                  Button backMainButton, Button backStartButton) {
         this.numOfFilesLabel = numOfFilesLabel;
         this.characterCountLabel = characterCountLabel;
         this.lineCountLabel = lineCountLabel;
         this.wordCountLabel = individualWordCountLabel;
         this.quitButton = quitButton;
-        this.backButton = backButton;
+        this.backMainButton = backMainButton;
+        this.backStartButton = backStartButton;
     }
 
     public static OutputWindowComponents createOutputWindowLabels(){
@@ -42,20 +45,25 @@ public class OutputWindowComponents {
         wordCountLabel.setFont(new Font("Arial", 20));
         wordCountLabel.setAlignment(Pos.CENTER);
 
-        return new OutputWindowComponents(numOfFilesLabel, characterCountLabel, lineCountLabel, wordCountLabel, null, null);
+        return new OutputWindowComponents(numOfFilesLabel, characterCountLabel, lineCountLabel, wordCountLabel, null, null, null);
     }
 
     public static OutputWindowComponents createOutputWindowButtons(OutputWindowComponents components){
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
         quitButton.setFont(new Font("Arial", 18));
 
-        Button backButton = ButtonCreator.createButton("Back to Main", (event) -> {
+        Button backMainButton = ButtonCreator.createButton("Back to Main", (event) -> {
             // event creation in OutputWindow.java
         });
-        backButton.setFont(new Font("Arial", 18));
+        backMainButton.setFont(new Font("Arial", 18));
+
+        Button backStartButton = ButtonCreator.createButton("Back to Start", (event) -> {
+            // event creation in OutputWindow.java
+        });
 
         components.quitButton = quitButton;
-        components.backButton = backButton;
+        components.backMainButton = backMainButton;
+        components.backStartButton = backStartButton;
 
         return components;
     }
