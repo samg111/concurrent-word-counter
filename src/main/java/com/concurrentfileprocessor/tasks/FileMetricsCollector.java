@@ -10,42 +10,42 @@ import com.concurrentfileprocessor.FileStats;
 public class FileMetricsCollector implements Runnable {
     private final File file;
     private final ConcurrentHashMap<String, Integer> wordCount;
-    private final AtomicInteger totalCharacterCount;
-    private final AtomicInteger totalLineCount;
+    private final AtomicInteger characterCount;
+    private final AtomicInteger lineCount;
 
     public FileMetricsCollector(File file, FileStats fileStats) {
         this.file = file;
         this.wordCount = fileStats.wordCount;
-        this.totalCharacterCount = fileStats.totalCharacterCount;
-        this.totalLineCount = fileStats.totalLineCount;
+        this.characterCount = fileStats.characterCount;
+        this.lineCount = fileStats.lineCount;
     }
 
     @Override
     public void run() {
         try {
-            countFileComponents(file, wordCount, totalCharacterCount, totalLineCount);
+            countFileComponents(file, wordCount, characterCount, lineCount);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
         }
     }
 
-    public static void countFileComponents(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger totalCharacterCount, AtomicInteger totalLineCount) throws FileNotFoundException {
+    public static void countFileComponents(File file, ConcurrentHashMap<String, Integer> wordCount, AtomicInteger characterCount, AtomicInteger lineCount) throws FileNotFoundException {
         try (Scanner scanner = new Scanner(file)) {
-            int lineCount = 0;
+            int fileLineCount = 0;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                lineCount++;
-                Scanner wordScanner = new Scanner(line);
-                while (wordScanner.hasNext()) {
-                    String word = wordScanner.next().toLowerCase().replaceAll("[^a-z]", "");
-                    if (!word.isEmpty()) {
-                        wordCount.merge(word, 1, Integer::sum);
-                        totalCharacterCount.addAndGet(word.length());
+                fileLineCount++;
+                try (Scanner wordScanner = new Scanner(line)) {
+                    while (wordScanner.hasNext()) {
+                        String word = wordScanner.next().toLowerCase().replaceAll("[^a-z]", "");
+                        if (!word.isEmpty()) {
+                            wordCount.merge(word, 1, Integer::sum);
+                            characterCount.addAndGet(word.length());
+                        }
                     }
                 }
-                wordScanner.close();
             }
-            totalLineCount.addAndGet(lineCount);
+            lineCount.addAndGet(fileLineCount);
         }
     }
 }

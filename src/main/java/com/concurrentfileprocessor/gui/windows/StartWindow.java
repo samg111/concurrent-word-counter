@@ -8,8 +8,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class StartWindow {
-    private Controller controller;
-    private Stage stage;
+    private final Controller controller;
+    private final Stage stage;
 
     public StartWindow(Controller controller, Stage stage) {
         this.controller = controller;
