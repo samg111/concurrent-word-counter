@@ -1,5 +1,7 @@
 package com.concurrentfileprocessor.gui.windows;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.initFileDetails;
 import com.concurrentfileprocessor.gui.windows.components.OutputWindowComponents;
 
 import javafx.geometry.Pos;
@@ -23,8 +25,14 @@ public class OutputWindow {
         OutputWindowComponents components = OutputWindowComponents.createOutputWindowLabels();
         components = OutputWindowComponents.createOutputWindowButtons(components);
 
-        components.backButton.setOnAction(event -> {
+        components.backMainButton.setOnAction(event -> {
+            fileStats = fileStats.refreshFileStats(fileStats);
             controller.showMainWindow(stage);
+        });
+        components.backStartButton.setOnAction(event -> {
+            fileStats = fileStats.refreshFileStats(fileStats);
+            initFileDetails();
+            controller.showStartWindow(stage);
         });
 
         VBox fileMetricsBox = new VBox(20);
@@ -33,7 +41,7 @@ public class OutputWindow {
 
         VBox navigationBox = new VBox(10);
         navigationBox.setAlignment(Pos.CENTER);
-        navigationBox.getChildren().addAll(components.backButton, components.quitButton);
+        navigationBox.getChildren().addAll(components.backMainButton, components.backStartButton, components.quitButton);
         
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #64748b;");

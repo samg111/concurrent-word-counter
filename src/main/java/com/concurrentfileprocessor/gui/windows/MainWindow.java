@@ -3,7 +3,6 @@ package com.concurrentfileprocessor.gui.windows;
 import java.io.File;
 import java.util.List;
 
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
 import com.concurrentfileprocessor.gui.windows.components.ButtonCreator;
@@ -132,7 +131,7 @@ public class MainWindow {
 
     public VBox createBottomPane(Controller controller, Stage stage) {
         Button runButton = ButtonCreator.createButton("Process Files", (event) -> {
-            fileStats = fileStats.refreshFileStats(fileStats);
+            // fileStats = fileStats.refreshFileStats(fileStats);
             FileProcessor.processFiles();
             controller.showOutputWindow(stage);
         });
