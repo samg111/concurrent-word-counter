@@ -6,7 +6,6 @@ import com.concurrentfileprocessor.processor.FileProcessor;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -35,7 +34,12 @@ public class MainWindow {
         VBox rightPane = createRightPane(components, stage);
         VBox bottomPane = createBottomPane(components);
         HBox centerPane = createCenterPane(leftPane, rightPane);
-        BorderPane root = createRoot(components.welcomLabel, centerPane, bottomPane);
+        
+        VBox topSection = new VBox(10);
+        topSection.setAlignment(Pos.CENTER);
+        topSection.getChildren().addAll(components.welcomeLabel, components.descriptionLabel);
+        
+        BorderPane root = createRoot(topSection, centerPane, bottomPane);
         root.setStyle("-fx-background-color: #f8fafc; -fx-padding: 20px;");
         Scene scene = new Scene(root, 1280, 720);
         stage.setTitle("Concurrent File Processor");
@@ -58,7 +62,7 @@ public class MainWindow {
     }
 
     public static VBox createRightPane(MainWindowComponents components, Stage primaryStage) {
-        VBox rightPane = new VBox(10, components.outputLabel, components.filenameField, components.outputDirectoryButton);
+        VBox rightPane = new VBox(10, components.outputLabel, components.outputFilenameLabel, components.filenameField, components.outputDirectoryLabel, components.outputDirectoryButton);
         rightPane.setAlignment(Pos.CENTER);
         rightPane.setMaxWidth(Double.MAX_VALUE);
         return rightPane;
@@ -82,10 +86,10 @@ public class MainWindow {
         return centerPane;
     }
 
-    public static BorderPane createRoot(Label welcomeLabel, HBox centerPane, VBox bottomPane) {
+    public static BorderPane createRoot(VBox topSection, HBox centerPane, VBox bottomPane) {
         BorderPane root = new BorderPane();
-        root.setTop(welcomeLabel);
-        BorderPane.setAlignment(welcomeLabel, Pos.CENTER);
+        root.setTop(topSection);
+        BorderPane.setAlignment(topSection, Pos.CENTER);
         root.setCenter(centerPane);
         root.setBottom(bottomPane);
         return root;
