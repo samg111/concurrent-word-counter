@@ -6,15 +6,14 @@ import java.util.Scanner;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilename;
 import com.concurrentfileprocessor.processor.FileProcessor;
 
 public class HeadlessRunner {
     public static void run() {
         System.out.println("Running in headless mode");
         
-        String outputFileName = getOutputFileName();
-        outputFilePath = outputFileName;
+        outputFilename = getOutputFileName();
         
         File inputDirectory = new File("input_files");
         if (inputDirectory.exists() && inputDirectory.isDirectory()) {

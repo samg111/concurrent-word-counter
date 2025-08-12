@@ -1,13 +1,15 @@
 package com.concurrentfileprocessor.tasks;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilename;
 import com.concurrentfileprocessor.FileStats;
 
 public class OutputWriter {
     public static void outputStatsToFile(String outputFilePath, FileStats fileStats) {
-        try (PrintWriter writer = new PrintWriter(outputFilePath)) {
+        try (PrintWriter writer = new PrintWriter(outputFilePath + File.separator + outputFilename)) {
             writer.println("Number of files: " + fileStats.numberOfFiles);
             writer.println("Total character count: " + fileStats.characterCount.get());
             writer.println("Total line count: " + fileStats.lineCount.get());    
