@@ -10,6 +10,7 @@ import com.concurrentfileprocessor.runners.HeadlessRunner;
 public class ConcurrentFileProcessor {
     public static FileStats fileStats;
     public static List<File> inputFiles;
+    public static String outputFilename;
     public static String outputFilePath;
     
     public static void main(String[] args) {
@@ -30,6 +31,15 @@ public class ConcurrentFileProcessor {
 
     public static void initFileDetails(){
         inputFiles = new ArrayList<>();
-        outputFilePath = "processed_files_stats.txt";
+        outputFilename = "processed_files_stats.txt";
+        outputFilePath = getDefaultDownloadsPath();
+    }
+
+    public static String getDefaultDownloadsPath() {
+        String home = System.getProperty("user.home");
+        String downloads = home + File.separator + "Downloads";
+        File downloadsDir = new File(downloads);
+
+        return downloadsDir.exists() ? downloads : home;
     }
 }
