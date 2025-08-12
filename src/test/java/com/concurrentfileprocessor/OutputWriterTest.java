@@ -2,6 +2,7 @@ package com.concurrentfileprocessor;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilename;
 import com.concurrentfileprocessor.tasks.OutputWriter;
 
 public class OutputWriterTest {
@@ -28,6 +30,7 @@ public class OutputWriterTest {
         wordCount.put("hello", 2);
         wordCount.put("world", 1);
         totalCharacterCount = new AtomicInteger(15);
+        outputFilename = "test_output_file.txt";
     }
 
     @AfterEach
@@ -36,13 +39,23 @@ public class OutputWriterTest {
         if (tempFile != null && tempFile.exists()) {
             tempFile.delete();
         }
+        if (tempFile != null) {
+            File outputFile = new File(tempFile.getParent(), outputFilename);
+            if (outputFile.exists()) {
+                outputFile.delete();
+            }
+        }
     }
 
     @Test
     void testOutputWordsToFile() throws IOException {
         fileStats = new FileStats(wordCount, totalCharacterCount, new AtomicInteger(0));
-        OutputWriter.outputStatsToFile(tempFile.getAbsolutePath(), fileStats);
-        List<String> lines = java.nio.file.Files.readAllLines(tempFile.toPath());
+        fileStats.numberOfFiles = 2;
+        String outputDir = tempFile.getParent();
+        OutputWriter.outputStatsToFile(outputDir, fileStats);
+        
+        File actualOutputFile = new File(outputDir, outputFilename);
+        List<String> lines = Files.readAllLines(actualOutputFile.toPath());
         assertEquals(6, lines.size());
         assertTrue(lines.get(0).startsWith("Number of files:"));
         assertEquals("Total character count: 15", lines.get(1));

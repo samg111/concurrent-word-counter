@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilename;
 import com.concurrentfileprocessor.processor.FileProcessor;
 
 class WordCountProcessorTest {
@@ -41,7 +42,8 @@ class WordCountProcessorTest {
         inputFiles = tempFiles;
         fileStats = new FileStats(new ConcurrentHashMap<>(), new AtomicInteger(0), new AtomicInteger(0));
         outputFile = File.createTempFile("output", ".txt");
-        outputFilePath = outputFile.getAbsolutePath();
+        outputFilePath = outputFile.getParent();
+        outputFilename = "test_output_file.txt";
     }
 
     @AfterEach
@@ -53,12 +55,19 @@ class WordCountProcessorTest {
         if (outputFile != null && outputFile.exists()) {
             outputFile.delete();
         }
+        if (outputFilePath != null) {
+            File actualOutputFile = new File(outputFilePath, outputFilename);
+            if (actualOutputFile.exists()) {
+                actualOutputFile.delete();
+            }
+        }
     }
 
     @Test
     void testProcessFilesIntegration() throws IOException {
         FileProcessor.processFiles();
-        List<String> lines = Files.readAllLines(outputFile.toPath());
+        File actualOutputFile = new File(outputFilePath, outputFilename);
+        List<String> lines = Files.readAllLines(actualOutputFile.toPath());
         assertEquals(7, lines.size());
         assertEquals("Number of files: 2", lines.get(0));
         assertTrue(lines.get(1).startsWith("Total character count:"));
