@@ -20,20 +20,36 @@ public class StartWindowComponents {
     }
 
     public static StartWindowComponents createStartWindowComponents() {
-        Label welcomeLabel = new Label("Welcome to the Concurrent File Processor");
-        welcomeLabel.setFont(new Font("Arial", 28));
+        Label welcomeLabel = new Label("Concurrent File Processor");
+        welcomeLabel.setFont(Font.font("System", 28));
         welcomeLabel.setAlignment(Pos.CENTER);
+        welcomeLabel.setStyle("-fx-text-fill: #1e40af; -fx-font-weight: bold;");
 
-        Label instructionLabel = new Label("Click Start to continue.");
-        instructionLabel.setFont(new Font("Arial", 28));
+        Label instructionLabel = new Label("Click Start to continue");
+        instructionLabel.setFont(Font.font("System", 18));
         instructionLabel.setAlignment(Pos.CENTER);
+        instructionLabel.setStyle("-fx-text-fill: #475569;");
 
         Button startButton = new Button("Start");
-        startButton.setFont(new Font("Arial", 24));
+        startButton.setFont(Font.font("System", 20));
+        startButton.setPrefSize(150, 45);
+        startButton.setStyle(
+            "-fx-background-color: #3b82f6;" +
+            "-fx-text-fill: white;" +
+            "-fx-background-radius: 8;"
+        );
+
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        quitButton.setFont(new Font("Arial", 18));
+        quitButton.setFont(Font.font("System", 16));
+        quitButton.setPrefSize(100, 35);
+        quitButton.setStyle(
+            "-fx-background-color: #d1d5db;" +
+            "-fx-text-fill: #374151;" +
+            "-fx-border-color: #9ca3af;" +
+            "-fx-border-width: 1;" +
+            "-fx-background-radius: 6;"
+        );
 
         return new StartWindowComponents(welcomeLabel, instructionLabel, startButton, quitButton);
     }
-    
 }

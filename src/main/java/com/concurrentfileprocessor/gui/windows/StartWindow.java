@@ -17,13 +17,17 @@ public class StartWindow {
     }
 
     public void show() {
-        VBox startLayout = new VBox(20);
+        VBox startLayout = new VBox(25);
         startLayout.setAlignment(Pos.CENTER);
-        startLayout.setPrefSize(600, 400);
-        startLayout.setStyle("-fx-background-color: #64748b;");
+        startLayout.setPrefSize(600, 450);
+        startLayout.setStyle(
+            "-fx-background-color: #f8fafc;" +
+            "-fx-padding: 30px;"
+        );
 
         StartWindowComponents components = StartWindowComponents.createStartWindowComponents();
         components.startButton.setOnAction(e -> controller.showMainWindow(stage));
+        
         startLayout.getChildren().addAll(
             components.welcomeLabel,
             components.instructionLabel,
@@ -31,10 +35,11 @@ public class StartWindow {
             components.quitButton
         );
 
-        Scene startScene = new Scene(startLayout, 600, 400);
-        startScene.getRoot().setStyle("-fx-background-color: #64748b;");
+        Scene startScene = new Scene(startLayout, 600, 450);
         stage.setScene(startScene);
-        stage.setTitle("Start Window");
+        stage.setTitle("Concurrent File Processor");
+        stage.setResizable(false);
+        stage.centerOnScreen();
         stage.show();
     }
 }
