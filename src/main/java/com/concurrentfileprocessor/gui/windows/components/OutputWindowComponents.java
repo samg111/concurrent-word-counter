@@ -30,36 +30,61 @@ public class OutputWindowComponents {
 
     public static OutputWindowComponents createOutputWindowLabels(){
         Label numOfFilesLabel = new Label("Number of files: " + fileStats.numberOfFiles);
-        numOfFilesLabel.setFont(new Font("Arial", 20));
+        numOfFilesLabel.setFont(Font.font("System", 24));
         numOfFilesLabel.setAlignment(Pos.CENTER);
+        numOfFilesLabel.setStyle("-fx-text-fill: #1e40af; -fx-font-weight: bold;");
 
         Label characterCountLabel = new Label("Total character count: " + fileStats.characterCount);
-        characterCountLabel.setFont(new Font("Arial", 20));
+        characterCountLabel.setFont(Font.font("System", 20));
         characterCountLabel.setAlignment(Pos.CENTER);
+        characterCountLabel.setStyle("-fx-text-fill: #374151;");
 
         Label lineCountLabel = new Label("Total line count: " + fileStats.lineCount);
-        lineCountLabel.setFont(new Font("Arial", 20));
+        lineCountLabel.setFont(Font.font("System", 20));
         lineCountLabel.setAlignment(Pos.CENTER);
+        lineCountLabel.setStyle("-fx-text-fill: #374151;");
 
         Label wordCountLabel = new Label("Total word count: " + fileStats.wordCount.size());
-        wordCountLabel.setFont(new Font("Arial", 20));
+        wordCountLabel.setFont(Font.font("System", 20));
         wordCountLabel.setAlignment(Pos.CENTER);
+        wordCountLabel.setStyle("-fx-text-fill: #374151;");
 
         return new OutputWindowComponents(numOfFilesLabel, characterCountLabel, lineCountLabel, wordCountLabel, null, null, null);
     }
 
     public static OutputWindowComponents createOutputWindowButtons(OutputWindowComponents components){
         Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        quitButton.setFont(new Font("Arial", 18));
+        quitButton.setFont(Font.font("System", 16));
+        quitButton.setPrefSize(100, 35);
+        quitButton.setStyle(
+            "-fx-background-color: #d1d5db;" +
+            "-fx-text-fill: #374151;" +
+            "-fx-border-color: #9ca3af;" +
+            "-fx-border-width: 1;" +
+            "-fx-background-radius: 6;"
+        );
 
         Button backMainButton = ButtonCreator.createButton("Back to Main", (event) -> {
             // event creation in OutputWindow.java
         });
-        backMainButton.setFont(new Font("Arial", 18));
+        backMainButton.setFont(Font.font("System", 18));
+        backMainButton.setPrefSize(200, 45);
+        backMainButton.setStyle(
+            "-fx-background-color: #3b82f6;" +
+            "-fx-text-fill: white;" +
+            "-fx-background-radius: 8;"
+        );
 
         Button backStartButton = ButtonCreator.createButton("Back to Start", (event) -> {
             // event creation in OutputWindow.java
         });
+        backStartButton.setFont(Font.font("System", 18));
+        backStartButton.setPrefSize(200, 45);
+        backStartButton.setStyle(
+            "-fx-background-color: #059669;" +
+            "-fx-text-fill: white;" +
+            "-fx-background-radius: 8;"
+        );
 
         components.quitButton = quitButton;
         components.backMainButton = backMainButton;

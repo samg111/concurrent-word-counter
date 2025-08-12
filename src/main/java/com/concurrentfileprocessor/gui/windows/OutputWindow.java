@@ -35,16 +35,16 @@ public class OutputWindow {
             controller.showStartWindow(stage);
         });
 
-        VBox fileMetricsBox = new VBox(20);
+        VBox fileMetricsBox = new VBox(25);
         fileMetricsBox.setAlignment(Pos.CENTER);
         fileMetricsBox.getChildren().addAll(components.numOfFilesLabel, components.lineCountLabel, components.characterCountLabel, components.wordCountLabel);
 
-        VBox navigationBox = new VBox(10);
+        VBox navigationBox = new VBox(15);
         navigationBox.setAlignment(Pos.CENTER);
         navigationBox.getChildren().addAll(components.backMainButton, components.backStartButton, components.quitButton);
         
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: #64748b;");
+        root.setStyle("-fx-background-color: #f8fafc; -fx-padding: 30px;");
         root.setCenter(fileMetricsBox);
         root.setBottom(navigationBox);
 
