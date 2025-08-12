@@ -31,6 +31,7 @@ public class StartWindow {
         startLayout.getChildren().addAll(
             components.welcomeLabel,
             components.instructionLabel,
+            components.descriptionLabel,
             components.startButton,
             components.quitButton
         );

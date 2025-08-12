@@ -9,12 +9,14 @@ import javafx.scene.text.Font;
 public class StartWindowComponents {
     public Label welcomeLabel;
     public Label instructionLabel;
+    public Label descriptionLabel;
     public Button startButton;
     public Button quitButton;
     
-    public StartWindowComponents(Label welcomeLabel, Label instructionLabel, Button startButton, Button quitButton) {
+    public StartWindowComponents(Label welcomeLabel, Label instructionLabel, Label descriptionLabel, Button startButton, Button quitButton) {
         this.welcomeLabel = welcomeLabel;
         this.instructionLabel = instructionLabel;
+        this.descriptionLabel = descriptionLabel;
         this.startButton = startButton;
         this.quitButton = quitButton;
     }
@@ -26,15 +28,23 @@ public class StartWindowComponents {
         welcomeLabel.setStyle("-fx-text-fill: #1e40af; -fx-font-weight: bold;");
 
         Label instructionLabel = new Label("Click Start to continue");
-        instructionLabel.setFont(Font.font("System", 18));
+        instructionLabel.setFont(Font.font("System", 24));
         instructionLabel.setAlignment(Pos.CENTER);
         instructionLabel.setStyle("-fx-text-fill: #475569;");
 
+        Label descriptionLabel = new Label("Process multiple text files concurrently to analyze word frequency, " +
+                                            "line counts, and character statistics with multi-threaded performance");
+        descriptionLabel.setFont(Font.font("System", 18));
+        descriptionLabel.setAlignment(Pos.CENTER);
+        descriptionLabel.setStyle("-fx-text-fill: #475569; -fx-text-alignment: center;");
+        descriptionLabel.setWrapText(true);
+
+        // Simple start button with basic styling
         Button startButton = new Button("Start");
         startButton.setFont(Font.font("System", 20));
         startButton.setPrefSize(150, 45);
         startButton.setStyle(
-            "-fx-background-color: #3b82f6;" +
+            "-fx-background-color: #059669;" +
             "-fx-text-fill: white;" +
             "-fx-background-radius: 8;"
         );
@@ -50,6 +60,6 @@ public class StartWindowComponents {
             "-fx-background-radius: 6;"
         );
 
-        return new StartWindowComponents(welcomeLabel, instructionLabel, startButton, quitButton);
+        return new StartWindowComponents(welcomeLabel, instructionLabel, descriptionLabel, startButton, quitButton);
     }
 }
