@@ -36,7 +36,7 @@ public class MainWindow {
         VBox bottomPane = createBottomPane(components);
         HBox centerPane = createCenterPane(leftPane, rightPane);
         BorderPane root = createRoot(components.welcomLabel, centerPane, bottomPane);
-        root.setStyle("-fx-background-color: #64748b;");
+        root.setStyle("-fx-background-color: #f8fafc; -fx-padding: 20px;");
         Scene scene = new Scene(root, 1280, 720);
         stage.setTitle("Concurrent File Processor");
         stage.setScene(scene);
