@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,9 +29,10 @@ public class MainWindowComponents {
     public Button inputFileButton;
     public Button outputDirectoryButton;
     public Button runButton;
+    public Button filenameButton;
     public TextField filenameField;
 
-    public MainWindowComponents(Label welcomeLabel, Label descriptionLabel, Label inputLabel, Label outputLabel, Label outputFilenameLabel, Label outputDirectoryLabel, Button quitButton, Button inputFileButton, Button outputDirectoryButton, Button runButton, TextField filenameField) {
+    public MainWindowComponents(Label welcomeLabel, Label descriptionLabel, Label inputLabel, Label outputLabel, Label outputFilenameLabel, Label outputDirectoryLabel, Button quitButton, Button inputFileButton, Button outputDirectoryButton, Button runButton, Button filenameButton, TextField filenameField) {
         this.welcomeLabel = welcomeLabel;
         this.descriptionLabel = descriptionLabel;
         this.inputLabel = inputLabel;
@@ -39,6 +41,7 @@ public class MainWindowComponents {
         this.outputDirectoryLabel = outputDirectoryLabel;
         this.quitButton = quitButton;
         this.inputFileButton = inputFileButton;
+        this.filenameButton = filenameButton;
         this.outputDirectoryButton = outputDirectoryButton;
         this.runButton = runButton;
         this.filenameField = filenameField;
@@ -56,8 +59,8 @@ public class MainWindowComponents {
         welcomeLabel.setFont(Font.font("System", 24));
         welcomeLabel.setStyle("-fx-text-fill: #1e40af; -fx-font-weight: bold;");
 
-        Label descriptionLabel = new Label("Select your input files and configure output settings like changing output directory or editing filename, "+
-                                           "then click Process Files to begin concurrent analysis");
+        Label descriptionLabel = new Label("Select your input files (.txt files only) and configure output settings like changing output directory or editing filename, "+
+                                           "then click the Process Files button to begin concurrent analysis");
         descriptionLabel.setFont(Font.font("System", 18));
         descriptionLabel.setAlignment(Pos.CENTER);
         descriptionLabel.setStyle("-fx-text-fill: #6b7280; -fx-text-alignment: center;");
@@ -71,21 +74,21 @@ public class MainWindowComponents {
                 fileNames += fileName + "\n";
             }
             inputLabel.setText(fileNames);
-            inputLabel.setWrapText(true);
-            inputLabel.setFont(Font.font("System", 16));
-            inputLabel.setStyle("-fx-text-fill: #374151;");
-        } else {
-            inputLabel.setFont(Font.font("System", 18));
-            inputLabel.setStyle("-fx-text-fill: #6b7280;");
         }
+        inputLabel.setWrapText(true);
+        inputLabel.setFont(Font.font("System", FontWeight.BOLD, 16));
 
-        Label outputLabel = new Label("Select output directory and choose a file name\n(default: processed_files_stats.txt)");
-        outputLabel.setFont(Font.font("System", 18));
-        // outputLabel.setStyle("-fx-text-fill: #6b7280;");
+        Label outputLabel = new Label("""
+                                      Modify or keep the filename and then choose output directory
+                                      (default filename: processed_files_stats.txt)
+                                      (default directory: Downloads)
+                                      """);
+        outputLabel.setFont(Font.font("System", FontWeight.BOLD, 18));
         
         outputLabel.setWrapText(true);
         outputLabel.setAlignment(Pos.CENTER);
         outputLabel.setStyle(outputLabel.getStyle() + "; -fx-text-alignment: center;");
+        outputLabel.setPadding(new javafx.geometry.Insets(0, 0, 15, 0));
 
         Label outputFilenameLabel = new Label("Output Filename: " + outputFilename);
         outputFilenameLabel.setFont(Font.font("System", 16));
@@ -96,8 +99,8 @@ public class MainWindowComponents {
         outputDirectoryLabel.setStyle("-fx-text-fill: #374151;");
 
         
-        return new MainWindowComponents(welcomeLabel, descriptionLabel, inputLabel, outputLabel, outputFilenameLabel, outputDirectoryLabel, null, null, 
-                  null, null, null);
+        return new MainWindowComponents(welcomeLabel, descriptionLabel, inputLabel, outputLabel, outputFilenameLabel, outputDirectoryLabel, null, 
+                        null, null, null, null, null);
     }
 
     public static MainWindowComponents createMainWindowFields(MainWindowComponents components){
@@ -106,11 +109,13 @@ public class MainWindowComponents {
         filenameField.setText(outputFilename);
         filenameField.setStyle(
             "-fx-background-color: white;" +
-            "-fx-border-color: #d1d5db;" +
-            "-fx-border-width: 1;" +
+            "-fx-border-color: #6b7280;" +
+            "-fx-border-width: 2;" +
             "-fx-background-radius: 4;" +
             "-fx-padding: 8px;"
         );
+        
+        Platform.runLater(() -> filenameField.requestFocus());
         
         components.filenameField = filenameField;
 
@@ -154,20 +159,29 @@ public class MainWindowComponents {
             "-fx-background-radius: 8;"
         );
 
+        Button filenameButton = ButtonCreator.createButton("Set Filename", (event) -> {
+            outputFilename = components.filenameField.getText();
+            components.outputFilenameLabel.setText("Output filename: " + outputFilename);
+        });
+
+        filenameButton.setFont(Font.font("System", 14));
+        filenameButton.setPrefSize(120, 45);
+        filenameButton.setStyle(
+            "-fx-background-color: #3b82f6;" +
+            "-fx-text-fill: white;" +
+            "-fx-background-radius: 8;"
+        );
+        
         Button outputDirectoryButton = ButtonCreator.createButton("Select Output Directory", (event) -> {
-            String textFieldContents = components.filenameField.getText();
+            // String textFieldContents = components.filenameField.getText();
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("Select Output Directory");
             File directory = directoryChooser.showDialog(primaryStage);
             if (directory != null) {
                 outputFilePath = directory.getAbsolutePath();
-                outputFilename = textFieldContents;
+                outputFilename = components.filenameField.getText();
                 components.outputDirectoryLabel.setText("Output file path: " + outputFilePath);
                 components.outputFilenameLabel.setText("Output filename: " + outputFilename);
-                // components.outputDirectoryLabel.setWrapText(true);
-                // components.outputDirectoryLabel.setAlignment(Pos.CENTER);
-                // components.outputDirectoryLabel.setFont(Font.font("System", 16));
-                // components.outputDirectoryLabel.setStyle("-fx-text-fill: #374151;");
             }
         });
         outputDirectoryButton.setFont(Font.font("System", 18));
@@ -179,7 +193,6 @@ public class MainWindowComponents {
         );
 
         Button runButton = ButtonCreator.createButton("Process Files", (event) -> {
-            // event creation in OutputWindow.java
         });
         runButton.setFont(Font.font("System", 22));
         runButton.setPrefSize(250, 55);
@@ -193,6 +206,7 @@ public class MainWindowComponents {
 
         components.quitButton = quitButton;
         components.inputFileButton = inputFileButton;
+        components.filenameButton = filenameButton;
         components.outputDirectoryButton = outputDirectoryButton;
         components.runButton = runButton;
 

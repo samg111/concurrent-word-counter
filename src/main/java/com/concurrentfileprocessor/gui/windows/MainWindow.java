@@ -62,7 +62,14 @@ public class MainWindow {
     }
 
     public static VBox createRightPane(MainWindowComponents components, Stage primaryStage) {
-        VBox rightPane = new VBox(10, components.outputLabel, components.outputFilenameLabel, components.filenameField, components.outputDirectoryLabel, components.outputDirectoryButton);
+        HBox filenameContainer = new HBox(5);
+        filenameContainer.setAlignment(Pos.CENTER);
+        filenameContainer.getChildren().addAll(components.filenameField, components.filenameButton);
+        
+        HBox.setHgrow(components.filenameField, Priority.ALWAYS);
+        components.filenameField.setMaxWidth(Double.MAX_VALUE);
+        
+        VBox rightPane = new VBox(10, components.outputLabel, components.outputFilenameLabel, filenameContainer, components.outputDirectoryLabel, components.outputDirectoryButton);
         rightPane.setAlignment(Pos.CENTER);
         rightPane.setMaxWidth(Double.MAX_VALUE);
         return rightPane;
