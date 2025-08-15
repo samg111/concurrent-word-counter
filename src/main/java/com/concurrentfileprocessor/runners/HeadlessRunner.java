@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.inputFiles;
+import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilePath;
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.outputFilename;
 import com.concurrentfileprocessor.processor.FileProcessor;
 
@@ -13,6 +14,7 @@ public class HeadlessRunner {
     public static void run() {
         System.out.println("Running in headless mode");
         
+        outputFilePath = System.getProperty("user.dir");
         outputFilename = getOutputFileName();
         
         File inputDirectory = new File("input_files");
@@ -30,8 +32,12 @@ public class HeadlessRunner {
         }
         
         FileProcessor.processFiles();
+        System.out.println("Total file count: " + fileStats.numberOfFiles);
         System.out.println("Total character count: " + fileStats.characterCount.get());
         System.out.println("Total line count: " + fileStats.lineCount.get());
+        System.out.println("Total word count: " + fileStats.wordCount.size());
+
+        
     }
     
     private static String getOutputFileName() {
