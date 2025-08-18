@@ -35,13 +35,13 @@ public class FileMetricsCollector implements Runnable {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 fileLineCount++;
-                try (Scanner wordScanner = new Scanner(line)) {
-                    while (wordScanner.hasNext()) {
-                        String word = wordScanner.next().toLowerCase().replaceAll("[^a-z]", "");
-                        if (!word.isEmpty()) {
-                            wordCount.merge(word, 1, Integer::sum);
-                            characterCount.addAndGet(word.length());
-                        }
+                
+                String[] words = line.split("\\s+");
+                for (String word : words) {
+                    String cleanWord = word.toLowerCase().replaceAll("[^a-z]", "");
+                    if (!cleanWord.isEmpty()) {
+                        wordCount.merge(cleanWord, 1, Integer::sum);
+                        characterCount.addAndGet(cleanWord.length());
                     }
                 }
             }

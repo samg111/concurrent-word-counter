@@ -1,7 +1,7 @@
 package com.concurrentfileprocessor.gui.windows;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.initFileDetails;
+import com.concurrentfileprocessor.gui.windows.components.EventCreator;
 import com.concurrentfileprocessor.gui.windows.components.OutputWindowComponents;
 
 import javafx.geometry.Pos;
@@ -29,22 +29,23 @@ public class OutputWindow {
             fileStats = fileStats.refreshFileStats(fileStats);
             controller.showMainWindow(stage);
         });
-        components.backStartButton.setOnAction(event -> {
-            fileStats = fileStats.refreshFileStats(fileStats);
-            initFileDetails();
-            controller.showStartWindow(stage);
-        });
+        components.restartButton = EventCreator.addRestartEvent(components.restartButton, controller, stage);
+        // components.restartButton.setOnAction(event -> {
+        //     fileStats = fileStats.refreshFileStats(fileStats);
+        //     initFileDetails();
+        //     controller.showStartWindow(stage);
+        // });
 
-        VBox fileMetricsBox = new VBox(20);
+        VBox fileMetricsBox = new VBox(25);
         fileMetricsBox.setAlignment(Pos.CENTER);
         fileMetricsBox.getChildren().addAll(components.numOfFilesLabel, components.lineCountLabel, components.characterCountLabel, components.wordCountLabel);
 
-        VBox navigationBox = new VBox(10);
+        VBox navigationBox = new VBox(15);
         navigationBox.setAlignment(Pos.CENTER);
-        navigationBox.getChildren().addAll(components.backMainButton, components.backStartButton, components.quitButton);
+        navigationBox.getChildren().addAll(components.backMainButton, components.restartButton, components.quitButton);
         
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: #64748b;");
+        root.setStyle("-fx-background-color: #f8fafc; -fx-padding: 30px;");
         root.setCenter(fileMetricsBox);
         root.setBottom(navigationBox);
 
