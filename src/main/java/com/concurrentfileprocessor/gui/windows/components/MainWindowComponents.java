@@ -26,13 +26,14 @@ public class MainWindowComponents {
     public Label outputFilenameLabel;
     public Label outputDirectoryLabel;
     public Button quitButton;
+    public Button restartButton;
     public Button inputFileButton;
     public Button outputDirectoryButton;
     public Button runButton;
     public Button filenameButton;
     public TextField filenameField;
 
-    public MainWindowComponents(Label welcomeLabel, Label descriptionLabel, Label inputLabel, Label outputLabel, Label outputFilenameLabel, Label outputDirectoryLabel, Button quitButton, Button inputFileButton, Button outputDirectoryButton, Button runButton, Button filenameButton, TextField filenameField) {
+    public MainWindowComponents(Label welcomeLabel, Label descriptionLabel, Label inputLabel, Label outputLabel, Label outputFilenameLabel, Label outputDirectoryLabel, Button quitButton, Button restartButton, Button inputFileButton, Button outputDirectoryButton, Button runButton, Button filenameButton, TextField filenameField) {
         this.welcomeLabel = welcomeLabel;
         this.descriptionLabel = descriptionLabel;
         this.inputLabel = inputLabel;
@@ -40,6 +41,7 @@ public class MainWindowComponents {
         this.outputFilenameLabel = outputFilenameLabel;
         this.outputDirectoryLabel = outputDirectoryLabel;
         this.quitButton = quitButton;
+        this.restartButton = restartButton;
         this.inputFileButton = inputFileButton;
         this.filenameButton = filenameButton;
         this.outputDirectoryButton = outputDirectoryButton;
@@ -100,7 +102,7 @@ public class MainWindowComponents {
 
         
         return new MainWindowComponents(welcomeLabel, descriptionLabel, inputLabel, outputLabel, outputFilenameLabel, outputDirectoryLabel, null, 
-                        null, null, null, null, null);
+                        null, null, null, null, null, null);
     }
 
     public static MainWindowComponents createMainWindowFields(MainWindowComponents components){
@@ -204,7 +206,21 @@ public class MainWindowComponents {
             "-fx-background-radius: 10;"
         );
 
+        Button restartButton = ButtonCreator.createButton("Restart", (event) -> {
+            // event creation in MainWindow.java
+        });
+        restartButton.setFont(Font.font("System", 16));
+        restartButton.setPrefSize(100, 35);
+        restartButton.setStyle(
+            "-fx-background-color: #d1d5db;" +
+            "-fx-text-fill: #374151;" +
+            "-fx-border-color: #9ca3af;" +
+            "-fx-border-width: 1;" +
+            "-fx-background-radius: 6;"
+        );
+
         components.quitButton = quitButton;
+        components.restartButton = restartButton;
         components.inputFileButton = inputFileButton;
         components.filenameButton = filenameButton;
         components.outputDirectoryButton = outputDirectoryButton;
