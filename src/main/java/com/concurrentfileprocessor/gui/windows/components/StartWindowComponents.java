@@ -22,14 +22,14 @@ public class StartWindowComponents {
 
     public static StartWindowComponents createStartWindowComponents() {
         Label welcomeLabel = new Label("Concurrent File Processor");
-        welcomeLabel.setFont(Font.font("System", 28));
+        welcomeLabel.setFont(Font.font("System", 32));
         welcomeLabel.setAlignment(Pos.CENTER);
         welcomeLabel.setStyle("-fx-text-fill: #1e40af; -fx-font-weight: bold;");
 
         Label instructionLabel = new Label("Click Start to continue");
         instructionLabel.setFont(Font.font("System", 24));
         instructionLabel.setAlignment(Pos.CENTER);
-        instructionLabel.setStyle("-fx-text-fill: #475569;");
+        instructionLabel.setStyle("-fx-text-fill: #475569, -fx-font-weight: bold;");
 
         Label descriptionLabel = new Label("Process multiple text files concurrently to analyze word frequency, " +
                                             "line counts, and character statistics with multi-threaded performance");
@@ -38,7 +38,6 @@ public class StartWindowComponents {
         descriptionLabel.setStyle("-fx-text-fill: #475569; -fx-text-alignment: center;");
         descriptionLabel.setWrapText(true);
 
-        // Simple start button with basic styling
         Button startButton = new Button("Start");
         startButton.setFont(Font.font("System", 20));
         startButton.setPrefSize(150, 45);
@@ -49,17 +48,6 @@ public class StartWindowComponents {
         );
 
         Button quitButton = ButtonCreator.createQuitButton();
-
-        // Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        // quitButton.setFont(Font.font("System", 16));
-        // quitButton.setPrefSize(100, 35);
-        // quitButton.setStyle(
-        //     "-fx-background-color: #d1d5db;" +
-        //     "-fx-text-fill: #374151;" +
-        //     "-fx-border-color: #9ca3af;" +
-        //     "-fx-border-width: 1;" +
-        //     "-fx-background-radius: 6;"
-        // );
 
         return new StartWindowComponents(welcomeLabel, instructionLabel, descriptionLabel, startButton, quitButton);
     }
