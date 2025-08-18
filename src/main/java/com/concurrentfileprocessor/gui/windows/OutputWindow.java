@@ -1,7 +1,7 @@
 package com.concurrentfileprocessor.gui.windows;
 
 import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.initFileDetails;
+import com.concurrentfileprocessor.gui.windows.components.EventCreator;
 import com.concurrentfileprocessor.gui.windows.components.OutputWindowComponents;
 
 import javafx.geometry.Pos;
@@ -29,11 +29,12 @@ public class OutputWindow {
             fileStats = fileStats.refreshFileStats(fileStats);
             controller.showMainWindow(stage);
         });
-        components.restartButton.setOnAction(event -> {
-            fileStats = fileStats.refreshFileStats(fileStats);
-            initFileDetails();
-            controller.showStartWindow(stage);
-        });
+        components.restartButton = EventCreator.addRestartEvent(components.restartButton, controller, stage);
+        // components.restartButton.setOnAction(event -> {
+        //     fileStats = fileStats.refreshFileStats(fileStats);
+        //     initFileDetails();
+        //     controller.showStartWindow(stage);
+        // });
 
         VBox fileMetricsBox = new VBox(25);
         fileMetricsBox.setAlignment(Pos.CENTER);

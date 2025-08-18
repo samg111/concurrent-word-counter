@@ -1,7 +1,6 @@
 package com.concurrentfileprocessor.gui.windows;
 
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.fileStats;
-import static com.concurrentfileprocessor.ConcurrentFileProcessor.initFileDetails;
+import com.concurrentfileprocessor.gui.windows.components.EventCreator;
 import com.concurrentfileprocessor.gui.windows.components.MainWindowComponents;
 import com.concurrentfileprocessor.processor.FileProcessor;
 
@@ -31,12 +30,13 @@ public class MainWindow {
             FileProcessor.processFiles();
             controller.showOutputWindow(stage);
         });
+        components.restartButton = EventCreator.addRestartEvent(components.restartButton, controller, stage);
         
-        components.restartButton.setOnAction(event -> {
-            fileStats = fileStats.refreshFileStats(fileStats);
-            initFileDetails();
-            controller.showStartWindow(stage);
-        });
+        // components.restartButton.setOnAction(event -> {
+        //     fileStats = fileStats.refreshFileStats(fileStats);
+        //     initFileDetails();
+        //     controller.showStartWindow(stage);
+        // });
 
         VBox leftPane = createLeftPane(components);
         VBox rightPane = createRightPane(components, stage);
