@@ -53,16 +53,6 @@ public class OutputWindowComponents {
 
     public static OutputWindowComponents createOutputWindowButtons(OutputWindowComponents components){
         Button quitButton = ButtonCreator.createQuitButton();
-        // Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        // quitButton.setFont(Font.font("System", 16));
-        // quitButton.setPrefSize(100, 35);
-        // quitButton.setStyle(
-        //     "-fx-background-color: #d1d5db;" +
-        //     "-fx-text-fill: #374151;" +
-        //     "-fx-border-color: #9ca3af;" +
-        //     "-fx-border-width: 1;" +
-        //     "-fx-background-radius: 6;"
-        // );
 
         Button backMainButton = ButtonCreator.createButton("Back to Main", (event) -> {
             // event creation in OutputWindow.java
@@ -70,23 +60,12 @@ public class OutputWindowComponents {
         backMainButton.setFont(Font.font("System", 18));
         backMainButton.setPrefSize(200, 45);
         backMainButton.setStyle(
-            "-fx-background-color: #3b82f6;" +
+            "-fx-background-color: #059669;" +
             "-fx-text-fill: white;" +
             "-fx-background-radius: 8;"
         );
 
         Button restartButton = ButtonCreator.createRestartButton();
-
-        // Button backStartButton = ButtonCreator.createButton("Back to Start", (event) -> {
-        //     // event creation in OutputWindow.java
-        // });
-        // backStartButton.setFont(Font.font("System", 18));
-        // backStartButton.setPrefSize(200, 45);
-        // backStartButton.setStyle(
-        //     "-fx-background-color: #059669;" +
-        //     "-fx-text-fill: white;" +
-        //     "-fx-background-radius: 8;"
-        // );
 
         components.quitButton = quitButton;
         components.backMainButton = backMainButton;
