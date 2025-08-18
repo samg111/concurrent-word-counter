@@ -13,11 +13,13 @@ import com.concurrentfileprocessor.processor.FileProcessor;
 public class HeadlessRunner {
     public static void run() {
         System.out.println("Running in headless mode");
-        
-        outputFilePath = System.getProperty("user.dir");
+
+        String currentDir = System.getProperty("user.dir");
+        File inputDirectory = new File(currentDir);
+        outputFilePath = currentDir;
+
         outputFilename = getOutputFileName();
         
-        File inputDirectory = new File("input_files");
         if (inputDirectory.exists() && inputDirectory.isDirectory()) {
             File[] files = inputDirectory.listFiles((dir, name) -> name.toLowerCase().endsWith(".txt"));
             if (files != null) {
@@ -43,12 +45,12 @@ public class HeadlessRunner {
     private static String getOutputFileName() {
         String fileName;
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("Enter output file name (default: processed_files_stats.txt): ");
+            System.out.print("Enter output file name (default: processed_file_stats.txt): ");
             fileName = scanner.nextLine().trim();
         }
         
         if (fileName.isEmpty()) {
-            fileName = "processed_files_stats.txt";
+            fileName = "processed_file_stats.txt";
             System.out.println("Using default file name: " + fileName);
         }
         
