@@ -125,16 +125,18 @@ public class MainWindowComponents {
     }
 
     public static MainWindowComponents createMainWindowButtons(MainWindowComponents components, Stage primaryStage){
-        Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        quitButton.setFont(Font.font("System", 16));
-        quitButton.setPrefSize(100, 35);
-        quitButton.setStyle(
-            "-fx-background-color: #d1d5db;" +
-            "-fx-text-fill: #374151;" +
-            "-fx-border-color: #9ca3af;" +
-            "-fx-border-width: 1;" +
-            "-fx-background-radius: 6;"
-        );
+        // Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
+        // quitButton.setFont(Font.font("System", 16));
+        // quitButton.setPrefSize(100, 35);
+        // quitButton.setStyle(
+        //     "-fx-background-color: #d1d5db;" +
+        //     "-fx-text-fill: #374151;" +
+        //     "-fx-border-color: #9ca3af;" +
+        //     "-fx-border-width: 1;" +
+        //     "-fx-background-radius: 6;"
+        // );
+
+        Button quitButton = ButtonCreator.createQuitButton();
 
         Button inputFileButton = ButtonCreator.createButton("Select Input Files", (event) -> {
             FileChooser fileChooser = new FileChooser();

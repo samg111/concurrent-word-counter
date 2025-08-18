@@ -1,6 +1,5 @@
 package com.concurrentfileprocessor.gui.windows.components;
 
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,16 +48,18 @@ public class StartWindowComponents {
             "-fx-background-radius: 8;"
         );
 
-        Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        quitButton.setFont(Font.font("System", 16));
-        quitButton.setPrefSize(100, 35);
-        quitButton.setStyle(
-            "-fx-background-color: #d1d5db;" +
-            "-fx-text-fill: #374151;" +
-            "-fx-border-color: #9ca3af;" +
-            "-fx-border-width: 1;" +
-            "-fx-background-radius: 6;"
-        );
+        Button quitButton = ButtonCreator.createQuitButton();
+
+        // Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
+        // quitButton.setFont(Font.font("System", 16));
+        // quitButton.setPrefSize(100, 35);
+        // quitButton.setStyle(
+        //     "-fx-background-color: #d1d5db;" +
+        //     "-fx-text-fill: #374151;" +
+        //     "-fx-border-color: #9ca3af;" +
+        //     "-fx-border-width: 1;" +
+        //     "-fx-background-radius: 6;"
+        // );
 
         return new StartWindowComponents(welcomeLabel, instructionLabel, descriptionLabel, startButton, quitButton);
     }
