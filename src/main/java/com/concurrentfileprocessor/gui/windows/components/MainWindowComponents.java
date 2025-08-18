@@ -208,18 +208,20 @@ public class MainWindowComponents {
             "-fx-background-radius: 10;"
         );
 
-        Button restartButton = ButtonCreator.createButton("Restart", (event) -> {
-            // event creation in MainWindow.java
-        });
-        restartButton.setFont(Font.font("System", 16));
-        restartButton.setPrefSize(100, 35);
-        restartButton.setStyle(
-            "-fx-background-color: #d1d5db;" +
-            "-fx-text-fill: #374151;" +
-            "-fx-border-color: #9ca3af;" +
-            "-fx-border-width: 1;" +
-            "-fx-background-radius: 6;"
-        );
+        Button restartButton = ButtonCreator.createRestartButton();
+
+        // Button restartButton = ButtonCreator.createButton("Restart", (event) -> {
+        //     // event creation in MainWindow.java
+        // });
+        // restartButton.setFont(Font.font("System", 16));
+        // restartButton.setPrefSize(100, 35);
+        // restartButton.setStyle(
+        //     "-fx-background-color: #d1d5db;" +
+        //     "-fx-text-fill: #374151;" +
+        //     "-fx-border-color: #9ca3af;" +
+        //     "-fx-border-width: 1;" +
+        //     "-fx-background-radius: 6;"
+        // );
 
         components.quitButton = quitButton;
         components.restartButton = restartButton;

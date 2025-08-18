@@ -26,4 +26,20 @@ public class ButtonCreator {
         );
         return quitButton;
     }
+
+    public static Button createRestartButton(){
+        Button restartButton = ButtonCreator.createButton("Restart", (event) -> {
+            // event creation in Window.java class
+        });
+        restartButton.setFont(Font.font("System", 16));
+        restartButton.setPrefSize(100, 35);
+        restartButton.setStyle(
+            "-fx-background-color: #d1d5db;" +
+            "-fx-text-fill: #374151;" +
+            "-fx-border-color: #9ca3af;" +
+            "-fx-border-width: 1;" +
+            "-fx-background-radius: 6;"
+        );
+        return restartButton;
+    }
 }

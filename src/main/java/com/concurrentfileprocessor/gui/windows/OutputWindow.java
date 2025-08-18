@@ -29,7 +29,7 @@ public class OutputWindow {
             fileStats = fileStats.refreshFileStats(fileStats);
             controller.showMainWindow(stage);
         });
-        components.backStartButton.setOnAction(event -> {
+        components.restartButton.setOnAction(event -> {
             fileStats = fileStats.refreshFileStats(fileStats);
             initFileDetails();
             controller.showStartWindow(stage);
@@ -41,7 +41,7 @@ public class OutputWindow {
 
         VBox navigationBox = new VBox(15);
         navigationBox.setAlignment(Pos.CENTER);
-        navigationBox.getChildren().addAll(components.backMainButton, components.backStartButton, components.quitButton);
+        navigationBox.getChildren().addAll(components.backMainButton, components.restartButton, components.quitButton);
         
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #f8fafc; -fx-padding: 30px;");

@@ -14,17 +14,17 @@ public class OutputWindowComponents {
     public Label wordCountLabel;
     public Button quitButton;
     public Button backMainButton;
-    public Button backStartButton;
+    public Button restartButton;
 
     public OutputWindowComponents(Label numOfFilesLabel, Label characterCountLabel, Label lineCountLabel, Label individualWordCountLabel, Button quitButton, 
-                                  Button backMainButton, Button backStartButton) {
+                                  Button backMainButton, Button restartButton) {
         this.numOfFilesLabel = numOfFilesLabel;
         this.characterCountLabel = characterCountLabel;
         this.lineCountLabel = lineCountLabel;
         this.wordCountLabel = individualWordCountLabel;
         this.quitButton = quitButton;
         this.backMainButton = backMainButton;
-        this.backStartButton = backStartButton;
+        this.restartButton = restartButton;
     }
 
     public static OutputWindowComponents createOutputWindowLabels(){
@@ -75,20 +75,22 @@ public class OutputWindowComponents {
             "-fx-background-radius: 8;"
         );
 
-        Button backStartButton = ButtonCreator.createButton("Back to Start", (event) -> {
-            // event creation in OutputWindow.java
-        });
-        backStartButton.setFont(Font.font("System", 18));
-        backStartButton.setPrefSize(200, 45);
-        backStartButton.setStyle(
-            "-fx-background-color: #059669;" +
-            "-fx-text-fill: white;" +
-            "-fx-background-radius: 8;"
-        );
+        Button restartButton = ButtonCreator.createRestartButton();
+
+        // Button backStartButton = ButtonCreator.createButton("Back to Start", (event) -> {
+        //     // event creation in OutputWindow.java
+        // });
+        // backStartButton.setFont(Font.font("System", 18));
+        // backStartButton.setPrefSize(200, 45);
+        // backStartButton.setStyle(
+        //     "-fx-background-color: #059669;" +
+        //     "-fx-text-fill: white;" +
+        //     "-fx-background-radius: 8;"
+        // );
 
         components.quitButton = quitButton;
         components.backMainButton = backMainButton;
-        components.backStartButton = backStartButton;
+        components.restartButton = restartButton;
 
         return components;
     }
