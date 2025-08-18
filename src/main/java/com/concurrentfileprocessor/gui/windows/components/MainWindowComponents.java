@@ -70,12 +70,7 @@ public class MainWindowComponents {
 
         Label inputLabel = new Label("Click button below to select input files");
         if (inputFiles != null && !inputFiles.isEmpty()) {
-            String fileNames = "";
-            for (File file : inputFiles) {
-                String fileName = file.getName();
-                fileNames += fileName + "\n";
-            }
-            inputLabel.setText(fileNames);
+            inputLabel.setText(buildFilenamesList(inputFiles));
         }
         inputLabel.setWrapText(true);
         inputLabel.setFont(Font.font("System", FontWeight.BOLD, 16));
@@ -125,17 +120,6 @@ public class MainWindowComponents {
     }
 
     public static MainWindowComponents createMainWindowButtons(MainWindowComponents components, Stage primaryStage){
-        // Button quitButton = ButtonCreator.createButton("Quit", (event) -> {Platform.exit();});
-        // quitButton.setFont(Font.font("System", 16));
-        // quitButton.setPrefSize(100, 35);
-        // quitButton.setStyle(
-        //     "-fx-background-color: #d1d5db;" +
-        //     "-fx-text-fill: #374151;" +
-        //     "-fx-border-color: #9ca3af;" +
-        //     "-fx-border-width: 1;" +
-        //     "-fx-background-radius: 6;"
-        // );
-
         Button quitButton = ButtonCreator.createQuitButton();
 
         Button inputFileButton = ButtonCreator.createButton("Select Input Files", (event) -> {
@@ -143,12 +127,7 @@ public class MainWindowComponents {
             fileChooser.setTitle("Select Input Files");
             List<File> files = fileChooser.showOpenMultipleDialog(primaryStage);
             if (files != null) {
-                String fileNames = "";
-                for (File file : files) {
-                    String fileName = file.getName();
-                    fileNames += fileName + "\n";
-                }
-                components.inputLabel.setText(fileNames);
+                components.inputLabel.setText(buildFilenamesList(files));
                 components.inputLabel.setWrapText(true);
                 components.inputLabel.setFont(Font.font("System", 16));
                 components.inputLabel.setStyle("-fx-text-fill: #374151;");
@@ -177,7 +156,6 @@ public class MainWindowComponents {
         );
         
         Button outputDirectoryButton = ButtonCreator.createButton("Select Output Directory", (event) -> {
-            // String textFieldContents = components.filenameField.getText();
             DirectoryChooser directoryChooser = new DirectoryChooser();
             directoryChooser.setTitle("Select Output Directory");
             File directory = directoryChooser.showDialog(primaryStage);
@@ -210,19 +188,6 @@ public class MainWindowComponents {
 
         Button restartButton = ButtonCreator.createRestartButton();
 
-        // Button restartButton = ButtonCreator.createButton("Restart", (event) -> {
-        //     // event creation in MainWindow.java
-        // });
-        // restartButton.setFont(Font.font("System", 16));
-        // restartButton.setPrefSize(100, 35);
-        // restartButton.setStyle(
-        //     "-fx-background-color: #d1d5db;" +
-        //     "-fx-text-fill: #374151;" +
-        //     "-fx-border-color: #9ca3af;" +
-        //     "-fx-border-width: 1;" +
-        //     "-fx-background-radius: 6;"
-        // );
-
         components.quitButton = quitButton;
         components.restartButton = restartButton;
         components.inputFileButton = inputFileButton;
@@ -233,4 +198,11 @@ public class MainWindowComponents {
         return components;
     }
     
+    private static String buildFilenamesList(List<File> files) {
+        StringBuilder builder = new StringBuilder();
+        for (File file : files) {
+            builder.append("- ").append(file.getName()).append("\n");
+        }
+        return builder.toString();
+    }
 }
