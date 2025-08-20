@@ -64,4 +64,11 @@ public class OutputWriterTest {
         assertTrue(lines.contains("hello: 2"));
         assertTrue(lines.contains("world: 1"));
     }
+
+    @Test
+    void testOutputStatsToFileExceptionHandling() {
+        // invalid directory path to trigger exception
+        String invalidPath = "/invalid/path/that/does/not/exist";
+        OutputWriter.outputStatsToFile(invalidPath, fileStats);
+    }
 } 

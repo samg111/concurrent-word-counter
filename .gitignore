@@ -37,3 +37,6 @@ target/
 
 # appimage directory
 AppDir/
+
+# personal development scripts
+lint-and-test

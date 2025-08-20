@@ -19,6 +19,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Ensure Downloads directory exists
+      run: mkdir -p $HOME/Downloads
+
     - name: Cache Maven packages
       uses: actions/cache@v4
       with:
