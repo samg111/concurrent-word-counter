@@ -77,7 +77,7 @@ public class MainWindowComponents {
 
         Label outputLabel = new Label("""
                                       Modify or keep the filename and then choose output directory
-                                      (default filename: processed_files_stats.txt)
+                                      (default filename: processed_file_stats.txt)
                                       (default directory: Downloads)
                                       """);
         outputLabel.setFont(Font.font("System", FontWeight.BOLD, 18));

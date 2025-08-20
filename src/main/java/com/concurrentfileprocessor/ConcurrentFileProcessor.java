@@ -17,11 +17,6 @@ public class ConcurrentFileProcessor {
         fileStats = new FileStats();
         fileStats = fileStats.refreshFileStats(fileStats);
         initFileDetails();
-        // fileStats.wordCount = new ConcurrentHashMap<>();
-        // fileStats.characterCount = new AtomicInteger(0);
-        // fileStats.lineCount = new AtomicInteger(0);
-        // inputFiles = new ArrayList<>();
-        // outputFilePath = "processed_files_stats.txt";
         if (args.length > 0 && args[0].equals("--headless")) {
             HeadlessRunner.run();
         } else {
@@ -31,7 +26,7 @@ public class ConcurrentFileProcessor {
 
     public static void initFileDetails(){
         inputFiles = new ArrayList<>();
-        outputFilename = "processed_files_stats.txt";
+        outputFilename = "processed_file_stats.txt";
         outputFilePath = getDefaultDownloadsPath();
     }
 

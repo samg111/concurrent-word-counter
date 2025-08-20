@@ -24,11 +24,16 @@ hs_err_pid*
 replay_pid*
 
 # Input files
-input_files/*
+demo_input_files/*
 !input_files/Moby Dick; Or, The Whale by Herman Melville.txt
+!The Project Gutenberg Encyclopedia, Volume 1 of 28.txt
+!Romeo and Juliet by William Shakespeare.txt
 
 # Output files
-processed_files_stats.txt
+processed_file_stats.txt
 
 # Maven target directory (generated build output)
 target/
+
+# appimage directory
+AppDir/
