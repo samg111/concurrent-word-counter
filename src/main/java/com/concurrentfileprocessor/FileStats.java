@@ -38,8 +38,8 @@ public class FileStats {
      * @param stats the FileStats object to reset
      * @return the reset FileStats object
      */
-    public FileStats refreshFileStats(FileStats stats){
-        stats = new FileStats(null, null, null);
+    public FileStats refreshFileStats(){
+        FileStats stats = new FileStats(null, null, null);
         stats.wordCount = new ConcurrentHashMap<>();
         stats.characterCount = new AtomicInteger(0);
         stats.lineCount = new AtomicInteger(0);

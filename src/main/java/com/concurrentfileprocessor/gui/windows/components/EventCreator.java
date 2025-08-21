@@ -11,7 +11,7 @@ public class EventCreator {
 
     public static Button addRestartEvent(Button button, Controller controller, Stage stage){
         button.setOnAction(event -> {
-            fileStats = fileStats.refreshFileStats(fileStats);
+            fileStats = fileStats.refreshFileStats();
             initFileDetails();
             controller.showStartWindow(stage);
         });

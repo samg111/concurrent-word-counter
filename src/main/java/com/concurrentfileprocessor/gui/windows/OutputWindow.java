@@ -26,15 +26,10 @@ public class OutputWindow {
         components = OutputWindowComponents.createOutputWindowButtons(components);
 
         components.backMainButton.setOnAction(event -> {
-            fileStats = fileStats.refreshFileStats(fileStats);
+            fileStats = fileStats.refreshFileStats();
             controller.showMainWindow(stage);
         });
         components.restartButton = EventCreator.addRestartEvent(components.restartButton, controller, stage);
-        // components.restartButton.setOnAction(event -> {
-        //     fileStats = fileStats.refreshFileStats(fileStats);
-        //     initFileDetails();
-        //     controller.showStartWindow(stage);
-        // });
 
         VBox fileMetricsBox = new VBox(25);
         fileMetricsBox.setAlignment(Pos.CENTER);

@@ -29,8 +29,8 @@ public class ConcurrentFileProcessor {
      * @param args command line arguments use --headless for terminal mode or nothing for gui mode
      */
     public static void main(String[] args) {
-        // fileStats = new FileStats();
-        fileStats = fileStats.refreshFileStats(fileStats);
+        fileStats = new FileStats(null, null, null);
+        fileStats = fileStats.refreshFileStats();
         initFileDetails();
         if (args.length > 0 && args[0].equals("--headless")) {
             HeadlessRunner.run();
