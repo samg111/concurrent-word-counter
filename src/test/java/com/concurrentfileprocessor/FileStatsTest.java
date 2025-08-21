@@ -18,7 +18,7 @@ class FileStatsTest {
         FileStats stats = new FileStats(initialWordCount, initialCharacterCount, initialLineCount);
         
         // refresh the stats
-        FileStats refreshedStats = stats.refreshFileStats(stats);
+        FileStats refreshedStats = stats.refreshFileStats();
         
         // verify the stats are refreshed
         assertEquals(0, refreshedStats.wordCount.size());

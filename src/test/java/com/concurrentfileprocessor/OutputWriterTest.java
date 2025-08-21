@@ -52,7 +52,7 @@ public class OutputWriterTest {
         fileStats = new FileStats(wordCount, totalCharacterCount, new AtomicInteger(0));
         fileStats.numberOfFiles = 2;
         String outputDir = tempFile.getParent();
-        OutputWriter.outputStatsToFile(outputDir, fileStats);
+        OutputWriter.outputStatsToFile(outputDir, outputFilename, fileStats);
         
         File actualOutputFile = new File(outputDir, outputFilename);
         List<String> lines = Files.readAllLines(actualOutputFile.toPath());
@@ -69,6 +69,6 @@ public class OutputWriterTest {
     void testOutputStatsToFileExceptionHandling() {
         // invalid directory path to trigger exception
         String invalidPath = "/invalid/path/that/does/not/exist";
-        OutputWriter.outputStatsToFile(invalidPath, fileStats);
+        OutputWriter.outputStatsToFile(invalidPath, outputFilename, fileStats);
     }
 } 
