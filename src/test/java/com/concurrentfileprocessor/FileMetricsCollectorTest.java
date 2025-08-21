@@ -17,6 +17,7 @@ class FileMetricsCollectorTest {
     private FileStats fileStats;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void setUp() throws IOException {
         tempFile = File.createTempFile("testfile", ".txt");
         try (PrintWriter writer = new PrintWriter(tempFile)) {
@@ -27,6 +28,7 @@ class FileMetricsCollectorTest {
     }
 
     @AfterEach
+    @SuppressWarnings("unused")
     void tearDown() {
         if (tempFile != null && tempFile.exists()) {
             tempFile.delete();

@@ -21,6 +21,7 @@ class HeadlessRunnerTest {
     private File nonTxtFile;
 
     @BeforeEach
+    @SuppressWarnings("unused")
     void setUp() throws IOException {
         // temp working directory
         tempDir = File.createTempFile("testdir", "");
@@ -45,6 +46,7 @@ class HeadlessRunnerTest {
     }
 
     @AfterEach
+    @SuppressWarnings("unused")
     void tearDown() {
         if (txtFile1 != null && txtFile1.exists()) txtFile1.delete();
         if (txtFile2 != null && txtFile2.exists()) txtFile2.delete();
