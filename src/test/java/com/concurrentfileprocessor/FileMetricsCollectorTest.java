@@ -3,8 +3,6 @@ package com.concurrentfileprocessor;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,10 +23,7 @@ class FileMetricsCollectorTest {
             writer.println("test content");
         }
         
-        fileStats = new FileStats();
-        fileStats.wordCount = new ConcurrentHashMap<>();
-        fileStats.characterCount = new AtomicInteger(0);
-        fileStats.lineCount = new AtomicInteger(0);
+        fileStats = new FileStats(new java.util.concurrent.ConcurrentHashMap<>(), new java.util.concurrent.atomic.AtomicInteger(0), new java.util.concurrent.atomic.AtomicInteger(0));
     }
 
     @AfterEach
@@ -41,7 +36,7 @@ class FileMetricsCollectorTest {
     @Test
     void testCountFileComponents() throws Exception {
         // test the static method directly
-        FileMetricsCollector.countFileComponents(tempFile, fileStats.wordCount, fileStats.characterCount, fileStats.lineCount);
+        FileMetricsCollector.countFileComponents(tempFile, fileStats);
         
         // verify metrics were collected
         assertEquals(2, fileStats.wordCount.size());

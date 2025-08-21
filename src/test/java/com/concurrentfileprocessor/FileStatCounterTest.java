@@ -40,7 +40,8 @@ class FileStatCounterTest {
 
     @Test
     void testCountWordsInFile() throws FileNotFoundException {
-        FileMetricsCollector.countFileComponents(tempFile, wordCount, totalCharacterCount, new AtomicInteger(0));
+        FileStats fileStats = new FileStats(wordCount, totalCharacterCount, new AtomicInteger(0));
+        FileMetricsCollector.countFileComponents(tempFile, fileStats);
         assertEquals(2, wordCount.size());
         assertEquals(2, wordCount.get("hello"));
         assertEquals(1, wordCount.get("world"));
@@ -58,10 +59,16 @@ class FileStatCounterTest {
         ConcurrentHashMap<String, Integer> wc = new ConcurrentHashMap<>();
         AtomicInteger tc = new AtomicInteger(0);
         Thread t1 = new Thread(() -> {
-            try { FileMetricsCollector.countFileComponents(tempFile1, wc, tc, new AtomicInteger(0)); } catch (FileNotFoundException ignored) {}
+            try { 
+                FileStats stats1 = new FileStats(wc, tc, new AtomicInteger(0));
+                FileMetricsCollector.countFileComponents(tempFile1, stats1); 
+            } catch (FileNotFoundException ignored) {}
         });
         Thread t2 = new Thread(() -> {
-            try { FileMetricsCollector.countFileComponents(tempFile2, wc, tc, new AtomicInteger(0)); } catch (FileNotFoundException ignored) {}
+            try { 
+                FileStats stats2 = new FileStats(wc, tc, new AtomicInteger(0));
+                FileMetricsCollector.countFileComponents(tempFile2, stats2); 
+            } catch (FileNotFoundException ignored) {}
         });
         t1.start();
         t2.start();
