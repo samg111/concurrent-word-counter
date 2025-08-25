@@ -35,14 +35,17 @@ public class FileStats {
 
     /**
      * resets all statistics to zero
-     * @param stats the FileStats object to reset
      * @return the reset FileStats object
      */
     public FileStats refreshFileStats(){
+        // create new instance with null parameters
         FileStats stats = new FileStats(null, null, null);
+        
+        // initialize all collections to empty/zero state
         stats.wordCount = new ConcurrentHashMap<>();
         stats.characterCount = new AtomicInteger(0);
         stats.lineCount = new AtomicInteger(0);
+        
         return stats;
     }
 }
